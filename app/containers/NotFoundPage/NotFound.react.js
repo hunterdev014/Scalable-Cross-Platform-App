@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import Button from '../../components/Button/Button.react';
-
 function NotFound() {
   return (
     <article>
       <h1>Page not found.</h1>
-      <Button route="/">Home</Button>
+      <Link to="/" className="btn">Home</Link>
     </article>
   );
 }

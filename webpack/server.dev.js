@@ -1,4 +1,3 @@
-/* eslint no-console:0 */
 // Gets called when running npm start
 
 const webpack = require('webpack');

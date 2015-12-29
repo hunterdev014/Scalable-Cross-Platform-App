@@ -1,5 +1,4 @@
-/* eslint no-console:0 */
-// Gets called when running npm run serve
+// Gets called when running npm start
 
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');

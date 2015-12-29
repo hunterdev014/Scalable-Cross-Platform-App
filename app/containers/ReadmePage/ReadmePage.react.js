@@ -5,10 +5,7 @@
  */
 
 import React from 'react';
-
-import Button from '../../components/Button/Button.react';
-
-import styles from './ReadmePage.css';
+import { Link } from 'react-router';
 
 function ReadmePage() {
   return (
@@ -16,7 +13,7 @@ function ReadmePage() {
       <h2>Further Setup</h2>
       <p>Assuming you have already cloned the repo and ran all the commands from the README (otherwise you would not be here), these are the further steps:</p>
 
-      <ol className={styles.list}>
+      <ol>
         <li>Replace my name and the package name in the package.json file</li>
         <li>Replace the two components with your first component</li>
         <li>Replace the default actions with your first action</li>
@@ -24,7 +21,7 @@ function ReadmePage() {
         <li>And finally, update the unit tests</li>
       </ol>
 
-      <Button route="/">Home</Button>
+      <Link className="btn" to="/">Home</Link>
     </div>
   );
 }

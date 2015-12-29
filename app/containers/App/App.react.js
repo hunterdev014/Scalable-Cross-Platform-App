@@ -8,21 +8,17 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-
-import Img from '../../components/Img/Img.react';
 import Logo from '../../assets/logo.png';
 
 import styles from './App.css';
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className={styles.wrapper}>
-        <Img className={styles.logo} src={Logo} alt="Max Stoiber - Logo"/>
-        { this.props.children }
-      </div>
-    );
-  }
+function App(props) {
+  return (
+    <div className={styles.wrapper}>
+      <img className={styles.logo} src={Logo} />
+      { props.children }
+    </div>
+  );
 }
 
 // REDUX STUFF
