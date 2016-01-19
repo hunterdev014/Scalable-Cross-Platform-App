@@ -1,21 +1,11 @@
 /* eslint no-console:0 */
 // Gets called when running npm start
 
-const path = require('path');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const config = require('./webpack.dev.babel');
-const ip = require('ip');
-const chalk = require('chalk');
 
-console.log(
-  chalk.bold('Options:') +
-  chalk.gray('\n-----------------------------------') +
-  chalk.cyan('\n       Source: ') + path.join(__dirname, '..', 'app') +
-  chalk.cyan('\nHot reloading: ') + chalk.green('Enabled') +
-  chalk.gray('\n-----------------------------------')
-);
-console.log('\nStarting server...');
+console.log('Starting server...\n');
 
 new WebpackDevServer(webpack(config), { // Start a server
   publicPath: config.output.publicPath,
@@ -28,13 +18,6 @@ new WebpackDevServer(webpack(config), { // Start a server
     console.log(err);
   } else {
     console.log('Server started');
-    console.log(
-      chalk.bold('\nAccess URLs:') +
-      chalk.gray('\n-----------------------------------') +
-      '\n   Local: ' + chalk.magenta('http://localhost:3000') +
-      '\nExternal: ' + chalk.magenta('http://' + ip.address() + ':3000') +
-      chalk.gray('\n-----------------------------------')
-    );
-    console.log(chalk.blue('\nPress ' + chalk.italic('CTRL-C') + ' to stop'));
+    console.log('Listening at localhost:3000');
   }
 });

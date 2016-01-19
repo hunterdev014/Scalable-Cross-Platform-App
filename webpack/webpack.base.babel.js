@@ -3,22 +3,20 @@
  */
 
 const path = require('path');
-const webpack = require('webpack');
 
 module.exports = (options) => {
   return {
     entry: options.entry,
     output: { // Compile into js/build.js
       path: path.resolve(__dirname, '..', 'build'),
-      filename: '[name].js',
-      chunkFilename: '[name].chunk.js'
+      filename: 'js/bundle.js'
     },
     module: {
       loaders: [{
         test: /\.js$/, // Transform all .js files required somewhere with Babel
         loader: 'babel',
         exclude: path.join(__dirname, '..', '/node_modules/'),
-        query: options.babelQuery,
+        query: options.query,
       }, {
         test: /\.css$/, // Transform all .css files required somewhere with PostCSS
         loader: options.cssLoaders
@@ -31,9 +29,7 @@ module.exports = (options) => {
       }
       ]
     },
-    plugins: options.plugins.concat([
-      new webpack.optimize.CommonsChunkPlugin('common.js')
-    ]),
+    plugins: options.plugins,
     postcss: () => {
       return options.postcssPlugins;
     },

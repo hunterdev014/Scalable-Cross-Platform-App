@@ -8,9 +8,8 @@
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-redux": "^4.0.0",
-    "react-router": ">2.0.0-rc",
+    "react-router": "^1.0.0",
     "redux": "^3.0.0",
-    "redux-simple-router": "^2.0.3",
     "redux-thunk": "^1.0.0",
     "sanitize.css": "3.0.0"
   },
@@ -25,7 +24,6 @@
     "babel-preset-es2015": "^6.0.0",
     "babel-preset-react": "^6.0.0",
     "babel-preset-stage-2": "^6.0.0",
-    "chalk": "^1.1.1",
     "css-loader": "^0.23.0",
     "css-modules-require-hook": "2.1.0",
     "cssnano": "^3.0.1",
@@ -41,7 +39,6 @@
     "html-webpack-plugin": "^2.6.1",
     "ip": "1.1.0",
     "json-loader": "^0.5.2",
-    "lint-staged": "0.1.1",
     "mocha": "^2.3.2",
     "ngrok": "0.1.99",
     "object.assign": "^4.0.1",
@@ -51,6 +48,7 @@
     "postcss-reporter": "^1.2.1",
     "psi": "1.0.6",
     "react-addons-test-utils": "^0.14.3",
+    "react-dom": "^0.14.3",
     "react-transform-hmr": "^1.0.1",
     "rewire": "2.5.1",
     "style-loader": "^0.13.0",
@@ -64,7 +62,6 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "lint:staged": "eslint-staged",
     "pretest": "npm run lint",
     "test": "mocha --compilers js:babel-core/register,css:css-modules-require-hook --recursive 'app/**/*.test.js'",
     "test:watch": "npm test -- --watch",
@@ -75,7 +72,6 @@
     "pagespeed": "./webpack/pagespeed",
     "initProject": "NODE_ENV=initialisation ./webpack/init"
   },
-  "pre-commit": "lint:staged",
   "author": "Max Stoiber",
   "license": "MIT"
 }

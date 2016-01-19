@@ -1,25 +1,17 @@
 /* eslint no-console:0 */
 // Gets called when running npm run serve
 
-const path = require('path');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const config = require('./webpack.prod.babel');
-const ngrok = require('ngrok');
-const chalk = require('chalk');
+const ip = require('ip');
 
-console.log(
-  chalk.bold('Options:\n') +
-  chalk.gray('-----------------------------------\n') +
-  chalk.cyan('Source: ') + path.join(__dirname, '..', 'app') + '\n' +
-  chalk.gray('-----------------------------------\n')
-);
-console.log('Starting server from build folder...');
+console.log('Starting server from build folder...\n');
 
 new WebpackDevServer(webpack(config), { // Start a server
   publicPath: config.output.publicPath,
-  filename: config.output.filename,
-  contentBase: config.output.path,
+  filename: 'bundle.js',
+  contentBase: 'build',
   lazy: true,
   historyApiFallback: true,
   quiet: true // Without logging
@@ -28,13 +20,7 @@ new WebpackDevServer(webpack(config), { // Start a server
     console.log(err);
   } else {
     console.log('Server started');
-    ngrok.connect(3000, (innerErr, url) => {
-      if (innerErr) {
-        console.log(chalk.red('ERROR\n' + innerErr));
-      }
-      console.log('Tunnel initialised');
-      console.log('\nYour app is available at ' + chalk.magenta(url));
-      console.log(chalk.blue('\nPress ' + chalk.italic('CTRL-C') + ' to stop'));
-    });
+    console.log('Your app is available at http://' + ip.address() +
+      ':3000 on any device in your local network!');
   }
 });
