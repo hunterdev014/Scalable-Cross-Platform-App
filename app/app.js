@@ -7,7 +7,7 @@
  *
  */
 
-// Load the ServiceWorker, the Cache polyfill, the manifest.json file and the .htaccess file
+// Load the ServiceWorker, the manifest.json file and the .htaccess file
 import 'file?name=[name].[ext]!./serviceworker.js';
 import 'file?name=[name].[ext]!./manifest.json';
 import 'file?name=[name].[ext]!./.htaccess';
@@ -31,7 +31,7 @@ import { Router, Route } from 'react-router';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import FontFaceObserver from 'fontfaceobserver';
-import createHistory from 'history/lib/createBrowserHistory';
+import { browserHistory } from 'react-router';
 
 // Observer loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -45,9 +45,6 @@ openSansObserver.check().then(() => {
 });
 
 // Import the pages
-import HomePage from './containers/HomePage/HomePage.react';
-import ReadmePage from './containers/ReadmePage/ReadmePage.react';
-import NotFoundPage from './containers/NotFoundPage/NotFound.react';
 import App from './containers/App/App.react';
 
 // Import the CSS file, which HtmlWebpackPlugin transfers to the build folder
@@ -69,13 +66,36 @@ if (module.hot) {
 
 // Mostly boilerplate, except for the Routes. These are the pages you can go to,
 // which are all wrapped in the App component, which contains the navigation etc
+// See http://blog.mxstbr.com/2016/01/react-apps-with-pages for more information
+// about the require.ensure code splitting business
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={createHistory()}>
+    <Router history={browserHistory}>
       <Route component={App}>
-        <Route path="/" component={HomePage} />
-        <Route path="/readme" component={ReadmePage} />
-        <Route path="*" component={NotFoundPage} />
+        <Route
+          path="/"
+          getComponent={function get(location, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./containers/HomePage/HomePage.react').default);
+            }, 'HomePage');
+          }}
+        />
+        <Route
+          path="/readme"
+          getComponent={function get(location, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./containers/ReadmePage/ReadmePage.react').default);
+            }, 'ReadmePage');
+          }}
+        />
+        <Route
+          path="*"
+          getComponent={function get(location, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./containers/NotFoundPage/NotFound.react').default);
+            }, 'NotFoundPage');
+          }}
+        />
       </Route>
     </Router>
   </Provider>,
