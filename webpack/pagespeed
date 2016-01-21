@@ -14,7 +14,7 @@ startTunnel(runPsi);
 
 function runPsi(url) {
   log('\nStarting PageSpeed Insights');
-  psi.output(url).then(function(err) {
+  psi.output(url, function(err) {
     process.exit(0);
   });
 }
