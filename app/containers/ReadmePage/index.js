@@ -38,7 +38,7 @@ class ReadmePage extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    location: state.get('route').location
+    location: state.routing.location
   };
 }
 

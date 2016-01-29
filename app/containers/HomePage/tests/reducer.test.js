@@ -1,7 +1,6 @@
 import expect from 'expect';
 import * as constants from '../constants';
 import homeReducer from '../reducer';
-import { fromJS } from 'immutable';
 
 const initialState = homeReducer.__get__('initialState');
 
@@ -15,30 +14,28 @@ describe('defaultReducer', () => {
   // Test that it handles changing the owner correctly
   it('should handle the CHANGE_OWNER_NAME action', () => {
     const name = 'samsmith';
-    const expectedResult = fromJS({
-      ownerName: name
-    });
 
     expect(
-      homeReducer(fromJS({}), {
+      homeReducer({}, {
         type: constants.CHANGE_OWNER_NAME,
         name
       })
-    ).toEqual(expectedResult);
+    ).toEqual({
+      ownerName: name
+    });
   });
 
   // Test that it handles changing the project name correctly
   it('should handle the CHANGE_PROJECT_NAME action', () => {
     const name = 'Webapplication Boilerplate';
-    const expectedResult = fromJS({
-      projectName: name
-    });
 
     expect(
-      homeReducer(fromJS({}), {
+      homeReducer({}, {
         type: constants.CHANGE_PROJECT_NAME,
         name
       })
-    ).toEqual(expectedResult);
+    ).toEqual({
+      projectName: name
+    });
   });
 });

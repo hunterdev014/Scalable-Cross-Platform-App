@@ -22,15 +22,9 @@ class HomePage extends React.Component {
     this.onChangeRoute = this.onChangeRoute.bind(this);
     this.changeRouteToReadme = this.changeRouteToReadme.bind(this);
   }
-
-  shouldComponentUpdate(nextState, prevState) {
-    return nextState !== prevState;
-  }
-
   onChangeOwnerName(evt) {
     this.props.changeOwnerName(evt.target.value);
   }
-
   onChangeProjectName(evt) {
     this.props.changeProjectName(evt.target.value);
   }
@@ -44,6 +38,8 @@ class HomePage extends React.Component {
   }
 
   render() {
+    // const { projectName, ownerName } = this.props.data;
+
     return (
       <article>
         <div>
@@ -84,8 +80,8 @@ class HomePage extends React.Component {
 // react-redux stuff
 function mapStateToProps(state) {
   return {
-    projectName: state.get('home').get('projectName'),
-    ownerName: state.get('home').get('ownerName')
+    location: state.routing.location,
+    data: state.home
   };
 }
 
