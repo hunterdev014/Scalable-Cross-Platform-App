@@ -13,16 +13,11 @@ module.exports = (config) => {
     singleRun: true,
 
     files: [
-      {
-        pattern: `./test-bundler.js`,
-        watched: false,
-        served: true,
-        included: true
-      }
+      '../app/**/*.test.js'
     ],
 
     preprocessors: {
-      ['./test-bundler.js']: ['webpack', 'sourcemap']
+      ['../app/**/*.test.js']: ['webpack', 'sourcemap'],
     },
 
     webpack: webpackConfig,
