@@ -1,17 +1,25 @@
 # PostCSS
 
-PostCSS is a modular CSS preprocessor based on JavaScript. See the [official documentation](https://github.com/postcss/postcss) for more information!
+## Why?
 
-## Plugins
+## How?
 
-This boilerplate includes a few PostCSS plugins by default:
+## Which plugins?
 
-* [`postcss-focus`](https://github.com/postcss/postcss-focus): Adds a `:focus` selector to every `:hover` selector for keyboard accessibility.
+This boilerplate includes a few plugins by default:
 
-* [`autoprefixer`](https://github.com/postcss/autoprefixer): Prefixes your CSS automatically for the last two versions of all major browsers and IE10+.
+* `postcss-import`: Inlines `@import`ed stylesheets to create one big stylesheet.
 
-* [`cssnext`](https://github.com/moox/postcss-cssnext): Use tomorrows CSS features today. Transpiles CSS4 features down to CSS3.
+* `postcss-simple-vars`: Makes it possible to use `$variables in your CSS.
 
-* [`cssnano`](https://github.com/ben-eb/cssnano): Optimizes your CSS file. For a full list of optimizations check [the offical website](http://cssnano.co/optimisations/).
+* `postcss-focus`: Adds a `:focus` selector to every `:hover`.
 
-For a full, searchable catalog of possible plugins go to [postcss.parts](http://postcss.parts).
+* `autoprefixer-core`: Prefixes your CSS automatically, supporting the last two versions of all major browsers and IE 8 and up.
+
+* `cssnano`: Optimizes your CSS file. For a full list of optimizations check [the offical website](http://cssnano.co/optimisations/).
+
+* `postcss-reporter`: Makes warnings by the above plugins visible in the console.
+
+For a full, searchable catalog of plugins go to [postcss.parts](http://postcss.parts).
+
+## How to remove?
