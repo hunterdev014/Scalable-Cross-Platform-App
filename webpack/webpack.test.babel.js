@@ -2,8 +2,6 @@
  * TEST WEBPACK CONFIGURATION
  */
 
-const path = require('path');
-
 module.exports = {
   devtool: 'inline-source-map',
   module: {
@@ -12,12 +10,6 @@ module.exports = {
     noParse: [
       /node_modules\/sinon/,
       /node_modules\/acorn/,
-    ],
-    preLoaders: [
-      { test: /\.js$/,
-        loader: 'isparta',
-        include: path.resolve('app/'),
-      }
     ],
     loaders: [
       { test: /\.json$/, loader: 'json-loader' },
@@ -29,9 +21,6 @@ module.exports = {
           plugins: ['babel-plugin-rewire']
         }
       },
-      { test: /\.jpe?g$|\.gif$|\.png$/i,
-        loader: 'null-loader'
-      }
     ]
   },
   // Some node_modules pull in Node-specific dependencies.
@@ -52,14 +41,6 @@ module.exports = {
     'react/lib/ReactContext': 'window'
   },
   resolve: {
-    modulesDirectories: [
-      'containers',
-      'components',
-      'selectors',
-      'sagas',
-      'assets',
-      'node_modules'
-    ],
     alias: {
       // required for enzyme to work properly
       sinon: 'sinon/pkg/sinon'
