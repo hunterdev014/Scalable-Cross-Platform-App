@@ -7,8 +7,6 @@ const WebpackDevServer = require('webpack-dev-server');
 const config = require('./webpack.dev.babel');
 const ip = require('ip');
 const chalk = require('chalk');
-const argv = require('minimist')(process.argv.slice(2));
-const port = argv.p || 3000;
 
 console.log(
   chalk.bold('Options:') +
@@ -25,7 +23,7 @@ new WebpackDevServer(webpack(config), { // Start a server
   inline: false,
   historyApiFallback: true,
   quiet: true // Without logging
-}).listen(port, 'localhost', (err) => {
+}).listen(3000, 'localhost', (err) => {
   if (err) {
     console.log(err);
   } else {
@@ -33,8 +31,8 @@ new WebpackDevServer(webpack(config), { // Start a server
     console.log(
       chalk.bold('\nAccess URLs:') +
       chalk.gray('\n-----------------------------------') +
-      '\n   Local: ' + chalk.magenta('http://localhost:' + port) +
-      '\nExternal: ' + chalk.magenta('http://' + ip.address() + ':' + port) +
+      '\n   Local: ' + chalk.magenta('http://localhost:3000') +
+      '\nExternal: ' + chalk.magenta('http://' + ip.address() + ':3000') +
       chalk.gray('\n-----------------------------------')
     );
     console.log(chalk.blue('\nPress ' + chalk.italic('CTRL-C') + ' to stop'));
