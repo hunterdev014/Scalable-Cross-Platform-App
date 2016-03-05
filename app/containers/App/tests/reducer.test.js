@@ -1,5 +1,5 @@
 import expect from 'expect';
-import homeReducer from '../reducer';
+import globalReducer from '../reducer';
 import {
   changeUsername,
   loadRepos,
@@ -8,7 +8,7 @@ import {
 } from '../actions';
 import { fromJS } from 'immutable';
 
-describe('homeReducer', () => {
+describe('globalReducer', () => {
   let state;
   beforeEach(() => {
     state = fromJS({
@@ -24,14 +24,14 @@ describe('homeReducer', () => {
 
   it('should return the initial state', () => {
     const expectedResult = state;
-    expect(homeReducer(undefined, {})).toEqual(expectedResult);
+    expect(globalReducer(undefined, {})).toEqual(expectedResult);
   });
 
   it('should handle the changeUsername action correctly', () => {
     const fixture = 'mxstbr';
     const expectedResult = state.setIn(['userData', 'username'], fixture);
 
-    expect(homeReducer(state, changeUsername(fixture))).toEqual(expectedResult);
+    expect(globalReducer(state, changeUsername(fixture))).toEqual(expectedResult);
   });
 
   it('should handle the loadRepos action correctly', () => {
@@ -40,7 +40,7 @@ describe('homeReducer', () => {
       .set('error', false)
       .setIn(['userData', 'repositories'], false);
 
-    expect(homeReducer(state, loadRepos())).toEqual(expectedResult);
+    expect(globalReducer(state, loadRepos())).toEqual(expectedResult);
   });
 
   it('should handle the reposLoaded action correctly', () => {
@@ -52,7 +52,7 @@ describe('homeReducer', () => {
       .set('loading', false)
       .set('currentUser', state.getIn(['userData', 'username']));
 
-    expect(homeReducer(state, reposLoaded(fixture))).toEqual(expectedResult);
+    expect(globalReducer(state, reposLoaded(fixture))).toEqual(expectedResult);
   });
 
   it('should handle the repoLoadingError action correctly', () => {
@@ -63,6 +63,6 @@ describe('homeReducer', () => {
       .set('error', fixture)
       .set('loading', false);
 
-    expect(homeReducer(state, repoLoadingError(fixture))).toEqual(expectedResult);
+    expect(globalReducer(state, repoLoadingError(fixture))).toEqual(expectedResult);
   });
 });

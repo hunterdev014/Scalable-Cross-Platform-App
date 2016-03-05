@@ -10,7 +10,7 @@ describe('usernameSelector', () => {
   it('should select the username', () => {
     const username = 'mxstbr';
     const mockedState = fromJS({
-      home: {
+      global: {
         userData: {
           username,
         },

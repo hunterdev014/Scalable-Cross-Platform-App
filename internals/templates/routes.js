@@ -14,13 +14,6 @@ const routes = [
       }, 'HomePage');
     },
   }, {
-    path: '/features',
-    getComponent: function get(location, cb) {
-      require.ensure([], (require) => {
-        cb(null, require('FeaturePage').default);
-      }, 'FeaturePage');
-    },
-  }, {
     path: '*',
     getComponent: function get(location, cb) {
       require.ensure([], (require) => {
