@@ -15,15 +15,15 @@ import 'file?name=[name].[ext]!./.htaccess';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import { Router } from 'react-router';
 import { createStore, applyMiddleware } from 'redux';
-import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 import FontFaceObserver from 'fontfaceobserver';
+import { browserHistory } from 'react-router';
+import { syncHistory } from 'react-router-redux';
 import useScroll from 'scroll-behavior/lib/useScrollToTop';
 import { fromJS } from 'immutable';
+const reduxRouterMiddleware = syncHistory(browserHistory);
 import sagaMiddleware from 'redux-saga';
-
-import selectLocationSelector from 'selectLocationSelector';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -38,21 +38,17 @@ openSansObserver.check().then(() => {
 });
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
-import '../node_modules/sanitize.css/dist/sanitize.min.css';
+import '../node_modules/sanitize.css/sanitize.css';
 
 // Create the store with two middlewares
 // 1. sagaMiddleware: Imports all the asynchronous flows ("sagas") from the
 //    sagas folder and triggers them
-// 2. routerMiddleware: Syncs the location/URL path to the state
+// 2. reduxRouterMiddleware: Syncs the location/URL path to the state
 import rootReducer from './rootReducer';
 import sagas from './sagas';
-const createStoreWithMiddleware = applyMiddleware(
-  routerMiddleware(browserHistory), sagaMiddleware(...sagas)
-)(createStore);
+const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware, sagaMiddleware(...sagas))(createStore);
 const store = createStoreWithMiddleware(rootReducer, fromJS({}));
-const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: selectLocationSelector,
-});
+reduxRouterMiddleware.listenForReplays(store, (state) => state.get('route').location);
 
 // Make reducers hot reloadable, see http://mxs.is/googmo
 if (module.hot) {
@@ -72,7 +68,7 @@ const rootRoute = {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={useScroll(() => history)()} routes={rootRoute} />
+    <Router history={useScroll(() => browserHistory)()} routes={rootRoute} />
   </Provider>,
   document.getElementById('app')
 );
