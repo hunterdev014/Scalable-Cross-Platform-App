@@ -4,8 +4,11 @@
  */
 
 import { combineReducers } from 'redux-immutable';
-import { routeReducer } from './routeReducer';
+import { routeReducer } from 'react-router-redux';
 
-export default combineReducers({
-  route: routeReducer,
-});
+export default function createReducer(asyncReducers) {
+  return combineReducers({
+    route: routeReducer,
+    ...asyncReducers,
+  });
+}

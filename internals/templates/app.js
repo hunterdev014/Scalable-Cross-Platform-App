@@ -15,51 +15,27 @@ import 'file?name=[name].[ext]!./.htaccess';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
-import { createStore, applyMiddleware } from 'redux';
-import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
+import { Router } from 'react-router';
+import { browserHistory } from 'react-router';
 import useScroll from 'scroll-behavior/lib/useScrollToTop';
-import { fromJS } from 'immutable';
-import sagaMiddleware from 'redux-saga';
-
-import selectLocationSelector from 'selectLocationSelector';
+import configureStore from './store';
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 import '../node_modules/sanitize.css/dist/sanitize.min.css';
 
-// Create the store with two middlewares
-// 1. sagaMiddleware: Imports all the asynchronous flows ("sagas") from the
-//    sagas folder and triggers them
-// 2. routerMiddleware: Syncs the location/URL path to the state
-import rootReducer from './rootReducer';
-import sagas from './sagas';
-const createStoreWithMiddleware = applyMiddleware(
-  routerMiddleware(browserHistory), sagaMiddleware(...sagas)
-)(createStore);
-const store = createStoreWithMiddleware(rootReducer, fromJS({}));
-const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: selectLocationSelector,
-});
-
-// Make reducers hot reloadable, see http://mxs.is/googmo
-if (module.hot) {
-  module.hot.accept('./rootReducer', () => {
-    const nextRootReducer = require('./rootReducer').default;
-    store.replaceReducer(nextRootReducer);
-  });
-}
+const store = configureStore();
 
 // Set up the router, wrapping all Routes in the App component
 import App from 'App';
-import routes from './routes';
+import createRoutes from './routes';
 const rootRoute = {
   component: App,
-  childRoutes: routes,
+  childRoutes: createRoutes(store),
 };
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={useScroll(() => history)()} routes={rootRoute} />
+    <Router history={useScroll(() => browserHistory)()} routes={rootRoute} />
   </Provider>,
   document.getElementById('app')
 );
