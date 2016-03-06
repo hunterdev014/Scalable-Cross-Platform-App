@@ -4,13 +4,10 @@
  */
 
 import { combineReducers } from 'redux-immutable';
-import { routeReducer } from 'react-router-redux';
+import { routeReducer } from './routeReducer';
 import globalReducer from 'App/reducer';
 
-export default function createReducer(asyncReducers) {
-  return combineReducers({
-    route: routeReducer,
-    global: globalReducer,
-    ...asyncReducers,
-  });
-}
+export default combineReducers({
+  route: routeReducer,
+  global: globalReducer,
+});

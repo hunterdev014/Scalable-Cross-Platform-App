@@ -3,11 +3,11 @@
  */
 
 import { createSelector } from 'reselect';
-import homeSelector from 'homeSelector';
+import globalSelector from 'globalSelector';
 
 const usernameSelector = createSelector(
-  homeSelector,
-  (homeState) => homeState.get('username')
+  globalSelector,
+  (globalState) => globalState.getIn(['userData', 'username'])
 );
 
 export default usernameSelector;

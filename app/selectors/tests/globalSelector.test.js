@@ -8,7 +8,9 @@ import expect from 'expect';
 
 describe('globalSelector', () => {
   it('should select the global state', () => {
-    const globalState = fromJS({});
+    const globalState = fromJS({
+      userData: {},
+    });
     const mockedState = fromJS({
       global: globalState,
     });
