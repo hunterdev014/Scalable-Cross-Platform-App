@@ -17,7 +17,6 @@ import request from '../../utils/request';
 import usernameSelector from 'usernameSelector';
 
 const generator = getGithubData();
-const username = 'mxstbr';
 
 describe('getGithubData Saga', () => {
   // We have to test twice, once for a successful load and once for an unsuccessful one
@@ -25,6 +24,7 @@ describe('getGithubData Saga', () => {
   beforeEach(() => {
     expect(generator.next().value).toEqual(take(LOAD_REPOS));
     expect(generator.next().value).toEqual(select(usernameSelector));
+    const username = 'mxstbr';
     const requestURL = 'https://api.github.com/users/' + username + '/repos?type=all&sort=updated';
     expect(generator.next(username).value).toEqual(call(request, requestURL));
   });
@@ -37,7 +37,7 @@ describe('getGithubData Saga', () => {
         name: 'Second repo',
       }],
     };
-    expect(generator.next(response).value).toEqual(put(reposLoaded(response.data, username)));
+    expect(generator.next(response).value).toEqual(put(reposLoaded(response.data)));
   });
 
   it('should call the repoLoadingError action if the response errors', () => {

@@ -1,13 +1,14 @@
 import expect from 'expect';
-import appReducer from '../reducer';
+import globalReducer from '../reducer';
 import {
+  changeUsername,
   loadRepos,
   reposLoaded,
   repoLoadingError,
 } from '../actions';
 import { fromJS } from 'immutable';
 
-describe('appReducer', () => {
+describe('globalReducer', () => {
   let state;
   beforeEach(() => {
     state = fromJS({
@@ -16,13 +17,21 @@ describe('appReducer', () => {
       currentUser: false,
       userData: fromJS({
         repositories: false,
+        username: '',
       }),
     });
   });
 
   it('should return the initial state', () => {
     const expectedResult = state;
-    expect(appReducer(undefined, {})).toEqual(expectedResult);
+    expect(globalReducer(undefined, {})).toEqual(expectedResult);
+  });
+
+  it('should handle the changeUsername action correctly', () => {
+    const fixture = 'mxstbr';
+    const expectedResult = state.setIn(['userData', 'username'], fixture);
+
+    expect(globalReducer(state, changeUsername(fixture))).toEqual(expectedResult);
   });
 
   it('should handle the loadRepos action correctly', () => {
@@ -31,20 +40,19 @@ describe('appReducer', () => {
       .set('error', false)
       .setIn(['userData', 'repositories'], false);
 
-    expect(appReducer(state, loadRepos())).toEqual(expectedResult);
+    expect(globalReducer(state, loadRepos())).toEqual(expectedResult);
   });
 
   it('should handle the reposLoaded action correctly', () => {
     const fixture = [{
       name: 'My Repo',
     }];
-    const username = 'test';
     const expectedResult = state
       .setIn(['userData', 'repositories'], fixture)
       .set('loading', false)
-      .set('currentUser', username);
+      .set('currentUser', state.getIn(['userData', 'username']));
 
-    expect(appReducer(state, reposLoaded(fixture, username))).toEqual(expectedResult);
+    expect(globalReducer(state, reposLoaded(fixture))).toEqual(expectedResult);
   });
 
   it('should handle the repoLoadingError action correctly', () => {
@@ -55,6 +63,6 @@ describe('appReducer', () => {
       .set('error', fixture)
       .set('loading', false);
 
-    expect(appReducer(state, repoLoadingError(fixture))).toEqual(expectedResult);
+    expect(globalReducer(state, repoLoadingError(fixture))).toEqual(expectedResult);
   });
 });

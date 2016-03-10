@@ -16,21 +16,41 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
+import { createStore, applyMiddleware } from 'redux';
 import { browserHistory } from 'react-router';
+import { syncHistory } from 'react-router-redux';
 import useScroll from 'scroll-behavior/lib/useScrollToTop';
-import configureStore from './store';
+import { fromJS } from 'immutable';
+const reduxRouterMiddleware = syncHistory(browserHistory);
+import sagaMiddleware from 'redux-saga';
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 import '../node_modules/sanitize.css/dist/sanitize.min.css';
 
-const store = configureStore();
+// Create the store with two middlewares
+// 1. sagaMiddleware: Imports all the asynchronous flows ("sagas") from the
+//    sagas folder and triggers them
+// 2. reduxRouterMiddleware: Syncs the location/URL path to the state
+import rootReducer from './rootReducer';
+import sagas from './sagas';
+const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware, sagaMiddleware(...sagas))(createStore);
+const store = createStoreWithMiddleware(rootReducer, fromJS({}));
+reduxRouterMiddleware.listenForReplays(store, (state) => state.get('route').location);
+
+// Make reducers hot reloadable, see http://mxs.is/googmo
+if (module.hot) {
+  module.hot.accept('./rootReducer', () => {
+    const nextRootReducer = require('./rootReducer').default;
+    store.replaceReducer(nextRootReducer);
+  });
+}
 
 // Set up the router, wrapping all Routes in the App component
 import App from 'App';
-import createRoutes from './routes';
+import routes from './routes';
 const rootRoute = {
   component: App,
-  childRoutes: createRoutes(store),
+  childRoutes: routes,
 };
 
 ReactDOM.render(
