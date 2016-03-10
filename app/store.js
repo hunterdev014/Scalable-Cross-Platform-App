@@ -1,20 +1,23 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { fromJS } from 'immutable';
-import { routerMiddleware } from 'react-router-redux';
 import sagaMiddleware from 'redux-saga';
+import { syncHistory } from 'react-router-redux';
+import { browserHistory } from 'react-router';
+const reduxRouterMiddleware = syncHistory(browserHistory);
 import sagas from './sagas';
 import createReducer from './rootReducer';
 
-export default function configureStore(initialState = {}, history) {
+export default function configureStore(initialState = {}) {
   // Create the store with two middlewares
   // 1. sagaMiddleware: Imports all the asynchronous flows ("sagas") from the
   //    sagas folder and triggers them
-  // 2. routerMiddleware: Syncs the location/URL path to the state
+  // 2. reduxRouterMiddleware: Syncs the location/URL path to the state
   const createStoreWithMiddleware = compose(
-    applyMiddleware(routerMiddleware(history), sagaMiddleware(...sagas)),
+    applyMiddleware(reduxRouterMiddleware, sagaMiddleware(...sagas)),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   )(createStore);
   const store = createStoreWithMiddleware(createReducer(), fromJS(initialState));
+  reduxRouterMiddleware.listenForReplays(store, (state) => state.get('route').location);
 
 // Make reducers hot reloadable, see http://mxs.is/googmo
   if (module.hot) {
