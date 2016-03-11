@@ -1,4 +1,4 @@
-<img src="https://cloud.githubusercontent.com/assets/5436686/13701007/0192aa9a-e785-11e5-962d-e239172cc763.jpg" alt="react boilerplate banner" align="center" />
+<img src="https://raw.githubusercontent.com/mxstbr/react-boilerplate-brand/master/assets/banner-metal.jpg" alt="react boilerplate banner" align="center" />
 
 <div align="center">
   <!-- Dependency Status -->
@@ -18,6 +18,8 @@
     <img src="https://coveralls.io/repos/github/mxstbr/react-boilerplate/badge.svg?branch=v3.0.0" alt="Test Coverage" />
   </a>
 </div>
+
+<br />
 
 Quick setup for new performance orientated, offline–first React.js applications featuring Redux, hot–reloading, PostCSS, react-router, ServiceWorker, AppCache, FontFaceObserver and Mocha.
 
