@@ -8,7 +8,7 @@ import React from 'react';
 
 export function NotFound() {
   return (
-    <h1>Page Not Found</h1>
+    <h2>Page Not Found</h2>
   );
 }
 

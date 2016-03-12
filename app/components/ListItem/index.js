@@ -2,14 +2,16 @@ import React from 'react';
 
 import styles from './styles.css';
 
-function ListItem(props) {
-  return (
-    <li className={ props.className || styles.item }>
-      <div className={ styles.itemContent }>
-        { props.content }
-      </div>
-    </li>
-  );
+class ListItem extends React.Component {
+  render() {
+    return (
+      <li className={ this.props.className || styles.item }>
+        <div className={ styles.itemContent }>
+          { this.props.content }
+        </div>
+      </li>
+    );
+  }
 }
 
 export default ListItem;
