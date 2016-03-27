@@ -23,14 +23,12 @@ describe('<FeaturePage />', () => {
 
   it('should link to "/"', () => {
     const openRouteSpy = expect.createSpy();
-
     // Spy on the openRoute method of the FeaturePage
     const openRoute = (dest) => {
       if (dest === '/') {
         openRouteSpy();
       }
     };
-
     const renderedComponent = mount(
       <FeaturePage changeRoute={openRoute} />
     );

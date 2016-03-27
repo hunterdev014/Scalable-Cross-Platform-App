@@ -5,12 +5,9 @@ module.exports = (config) => {
   config.set({
     frameworks: ['mocha'],
     reporters: ['coverage', 'mocha'],
-    /*eslint-disable */
     browsers: process.env.TRAVIS
       ? ['ChromeTravis']
-      : process.env.APPVEYOR
-        ? ['IE'] : ['Chrome'],
-    /*eslint-enable */
+      : ['Chrome'],
 
     autoWatch: false,
     singleRun: true,

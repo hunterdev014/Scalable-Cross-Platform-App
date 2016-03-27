@@ -53,18 +53,15 @@ export class HomePage extends React.Component {
 
   render() {
     let mainContent = null;
-
     // Show a loading indicator when we're loading
     if (this.props.loading) {
       mainContent = (<List component={LoadingIndicator} />);
-
     // Show an error if there is one
     } else if (this.props.error !== false) {
       const ErrorComponent = () => (
         <ListItem content={'Something went wrong, please try again!'} />
       );
       mainContent = (<List component={ErrorComponent} />);
-
     // If we're not loading, don't have an error and there are repos, show the repos
     } else if (this.props.repos !== false) {
       mainContent = (<List items={this.props.repos} component={RepoListItem} />);
@@ -107,7 +104,6 @@ function mapDispatchToProps(dispatch) {
       evt.preventDefault();
       dispatch(loadRepos());
     },
-
     dispatch,
   };
 }

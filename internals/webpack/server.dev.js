@@ -1,5 +1,4 @@
 /* eslint no-console:0 */
-
 // Gets called when running npm start
 
 const path = require('path');

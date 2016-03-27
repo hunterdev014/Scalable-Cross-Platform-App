@@ -41,10 +41,6 @@ module.exports = (options) => ({
   },
   plugins: options.plugins.concat([
     new webpack.optimize.CommonsChunkPlugin('common.js'),
-    new webpack.ProvidePlugin({
-      // make fetch available
-      fetch: 'exports?self.fetch!whatwg-fetch',
-    }),
   ]),
   postcss: () => options.postcssPlugins,
   resolve: {

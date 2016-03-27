@@ -12,7 +12,6 @@ import styles from './styles.css';
 
 function Button(props) {
   const className = props.className ? props.className : styles.button;
-
   // Render an anchor tag
   let button = (
     <a className={className} href={props.href} onClick={props.onClick}>{props.children}</a>
