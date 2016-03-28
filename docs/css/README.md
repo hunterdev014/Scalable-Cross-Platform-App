@@ -1,8 +1,6 @@
 # CSS
 
-This boilerplate uses PostCSS as a CSS preprocessor with a few utility plugins
-included by default, embraces component encapsulation with CSS Modules and
-resets browser specific styling with sanitize.css.
+This boilerplate uses PostCSS as a preprocessor with a few utility plugins included by default, embraces component encapsulation with CSS Modules and resets browser specific styling with stanitize.css.
 
 Learn more about
 
