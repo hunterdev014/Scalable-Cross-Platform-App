@@ -48,7 +48,7 @@ module.exports = (options) => ({
   ]),
   postcss: () => options.postcssPlugins,
   resolve: {
-    modules: [
+    modulesDirectories: [
       'containers',
       'components',
       'selectors',
