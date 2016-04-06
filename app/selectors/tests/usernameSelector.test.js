@@ -6,8 +6,6 @@ import usernameSelector from '../usernameSelector';
 import { fromJS } from 'immutable';
 import expect from 'expect';
 
-const selector = usernameSelector();
-
 describe('usernameSelector', () => {
   it('should select the username', () => {
     const username = 'mxstbr';
@@ -16,6 +14,6 @@ describe('usernameSelector', () => {
         username,
       },
     });
-    expect(selector(mockedState)).toEqual(username);
+    expect(usernameSelector(mockedState)).toEqual(username);
   });
 });

@@ -6,8 +6,6 @@ import reposSelector from '../reposSelector';
 import { fromJS } from 'immutable';
 import expect from 'expect';
 
-const selector = reposSelector();
-
 describe('reposSelector', () => {
   it('should select the repos', () => {
     const repositories = fromJS([]);
@@ -18,6 +16,6 @@ describe('reposSelector', () => {
         },
       },
     });
-    expect(selector(mockedState)).toEqual(repositories);
+    expect(reposSelector(mockedState)).toEqual(repositories);
   });
 });

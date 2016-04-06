@@ -6,8 +6,6 @@ import loadingSelector from '../loadingSelector';
 import { fromJS } from 'immutable';
 import expect from 'expect';
 
-const selector = loadingSelector();
-
 describe('loadingSelector', () => {
   it('should select the loading', () => {
     const loading = false;
@@ -16,6 +14,6 @@ describe('loadingSelector', () => {
         loading,
       },
     });
-    expect(selector(mockedState)).toEqual(loading);
+    expect(loadingSelector(mockedState)).toEqual(loading);
   });
 });
