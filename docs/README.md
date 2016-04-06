@@ -1,8 +1,8 @@
 # Documentation
 
-## Table of Contents
-
 - [General](general)
+  - [Prerequisites](general/prerequisites.md)
+  - [Features](general/features.md)
   - [**Commands**](general/commands.md)
   - [Files](general/files.md)
   - [Server Configurations](general/server-configs.md)
@@ -23,22 +23,6 @@
   - [routing](js/routing.md)
 
 ## Overview
-
-### Quickstart
-
-1. First off, let's kick the tyres and look at the sample _Repospective_ app that
-  comes bundled with this project to demo some of its best features:
-
-    ```Shell
-    npm install && npm start
-    ```
-
-  And go to [localhost:3000](http://localhost:3000) to see it in action.
-
-  - Add a Github username to see Redux and Redux Sagas in action
-  - Click the Features button to see React Router in action
-  - Edit the file at `/app`
-
 
 ### Development
 
