@@ -93,7 +93,7 @@ export class HomePage extends React.Component {
               </form>
               { mainContent }
           </section>
-          <Button handleRoute={ this.openFeaturesPage }>Features</Button>
+          <Button handleRoute = { this.openFeaturesPage }>Features</Button>
         </div>
       </article>
     );
@@ -115,9 +115,9 @@ function mapDispatchToProps(dispatch) {
 
 // Wrap the component to inject dispatch and state into it
 export default connect(createSelector(
-  reposSelector,
-  usernameSelector,
-  loadingSelector,
-  errorSelector,
+  reposSelector(),
+  usernameSelector(),
+  loadingSelector(),
+  errorSelector(),
   (repos, username, loading, error) => ({ repos, username, loading, error })
 ), mapDispatchToProps)(HomePage);
