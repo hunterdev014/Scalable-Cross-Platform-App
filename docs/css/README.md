@@ -11,5 +11,4 @@ Learn more:
 - [PostCSS](postcss.md)
 - [CSS Modules](css-modules.md)
 - [sanitize.css](sanitize.md)
-- [stylelint.css](stylelint.md)
 - [Using Sass](sass.md)
