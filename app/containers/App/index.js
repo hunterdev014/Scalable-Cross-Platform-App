@@ -10,7 +10,7 @@ import React from 'react';
 
 import Img from 'Img';
 import Footer from 'Footer';
-import Banner from './banner-metal.jpg';
+import Logo from './logo.png';
 import A from 'A';
 
 import styles from './styles.css';
@@ -24,8 +24,8 @@ function App(props) {
       >
         <Img
           className={ styles.logo }
-          src={ Banner }
-          alt="react-boilerplate - Logo"
+          src={ Logo }
+          alt="Max Stoiber - Logo"
         />
       </A>
       { props.children }
