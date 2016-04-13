@@ -4,44 +4,29 @@
 // about the require.ensure code splitting business
 import { injectAsyncReducer } from './store';
 
-function errorLoading(err) {
-  console.error('Dynamic page loading failed', err);
-}
-
-function loadModule(cb) {
-  return (module) => cb(null, module.default);
-}
-
-function loadReducer(store, name) {
-  return (module) => injectAsyncReducer(store, name, module.default);
-}
-
 export default function createRoutes(store) {
   return [
     {
       path: '/',
-      getComponent(location, cb) {
-        Promise.all([
-          System.import('HomePage/reducer'),
-          System.import('HomePage'),
-        ]).then(modules => {
-          loadReducer(store, 'home')(modules[0]);
-          loadModule(cb)(modules[1]);
-        }).catch(errorLoading);
+      getComponent: function get(location, cb) {
+        require.ensure([], (require) => {
+          injectAsyncReducer(store, 'home', require('HomePage/reducer').default);
+          cb(null, require('HomePage').default);
+        }, 'HomePage');
       },
     }, {
       path: '/features',
-      getComponent(location, cb) {
-        System.import('FeaturePage')
-          .then(loadModule(cb))
-          .catch(errorLoading);
+      getComponent: function get(location, cb) {
+        require.ensure([], (require) => {
+          cb(null, require('FeaturePage').default);
+        }, 'FeaturePage');
       },
     }, {
       path: '*',
-      getComponent(location, cb) {
-        System.import('NotFoundPage')
-          .then(loadModule(cb))
-          .catch(errorLoading);
+      getComponent: function get(location, cb) {
+        require.ensure([], (require) => {
+          cb(null, require('NotFoundPage').default);
+        }, 'NotFoundPage');
       },
     },
   ];

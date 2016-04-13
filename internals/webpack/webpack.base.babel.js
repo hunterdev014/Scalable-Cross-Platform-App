@@ -48,7 +48,7 @@ module.exports = (options) => ({
   ]),
   postcss: () => options.postcssPlugins,
   resolve: {
-    modules: [
+    modulesDirectories: [
       'containers',
       'components',
       'selectors',
@@ -61,10 +61,6 @@ module.exports = (options) => ({
       '.js',
       '.jsx',
       '.react.js',
-    ],
-    packageMains: [
-      'jsnext:main',
-      'main',
     ],
   },
   devtool: options.devtool,
