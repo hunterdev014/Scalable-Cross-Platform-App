@@ -6,7 +6,7 @@
  * otherwise it'll render a link with an onclick
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 import styles from './styles.css';
 
@@ -21,22 +21,22 @@ function Button(props) {
   // If the Button has a handleRoute prop, we want to render a button
   if (props.handleRoute) {
     button = (
-      <button className={className} onClick={ props.handleRoute } >{props.children}</button>
+      <button className={className} onClick={props.handleRoute} >{props.children}</button>
     );
   }
 
   return (
-    <div className={ styles.buttonWrapper }>
-      { button }
+    <div className={styles.buttonWrapper}>
+      {button}
     </div>
   );
 }
 
 Button.propTypes = {
-  className: PropTypes.string,
-  handleRoute: PropTypes.func,
-  href: PropTypes.string,
-  onClick: PropTypes.func,
+  className: React.PropTypes.string,
+  handleRoute: React.PropTypes.func,
+  href: React.PropTypes.string,
+  onClick: React.PropTypes.func,
 };
 
 export default Button;
