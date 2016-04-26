@@ -35,6 +35,9 @@ openSansObserver.check().then(() => {
   document.body.classList.remove(styles.fontLoaded);
 });
 
+// Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
+import '../node_modules/sanitize.css/sanitize.css';
+
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router
 // Optionally, this could be changed to leverage a created history
@@ -45,9 +48,9 @@ const store = configureStore(initialState, browserHistory);
 // Sync history and store, as the react-router-redux reducer
 // is under the non-default key ("routing"), selectLocationState
 // must be provided for resolving how to retrieve the "route" in the state
-import createSelectLocationState from 'selectLocationSelector';
+import selectLocationSelector from 'selectLocationSelector';
 const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: createSelectLocationState(),
+  selectLocationState: selectLocationSelector,
 });
 
 // Set up the router, wrapping all Routes in the App component
