@@ -4,13 +4,11 @@
 
 /* eslint-disable no-constant-condition */
 
+import { LOAD_REPOS } from 'App/constants';
+import { reposLoaded, repoLoadingError } from 'App/actions';
 import { take, call, put, select } from 'redux-saga/effects';
-
-import { LOAD_REPOS } from 'containers/App/constants';
-import { reposLoaded, repoLoadingError } from 'containers/App/actions';
-
-import request from 'utils/request';
-import usernameSelector from 'selectors/usernameSelector';
+import request from '../utils/request';
+import usernameSelector from 'usernameSelector';
 
 export function* getGithubData() {
   while (true) {

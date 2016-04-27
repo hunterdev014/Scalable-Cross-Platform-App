@@ -12,7 +12,7 @@ module.exports = {
     message: 'Which component should the route show?',
     validate: value => {
       if ((/.+/).test(value)) {
-        return componentExists(value) ? true : `"${value}" doesn't exist.`;
+        return componentExists(value) ? true : '"' + value + '" doesn\'t exist.';
       }
 
       return 'The path is required';
@@ -36,7 +36,7 @@ module.exports = {
   actions: [{
     type: 'modify',
     path: '../../app/routes.js',
-    pattern: /(\s{\n\s{6}path: '\*',)/g,
+    pattern: /(\s{\n\s{6}path: '\*'\,)/g,
     templateFile: './route/route.hbs',
   }],
 };

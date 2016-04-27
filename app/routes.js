@@ -22,8 +22,8 @@ export default function createRoutes(store) {
       path: '/',
       getComponent(location, cb) {
         Promise.all([
-          System.import('containers/HomePage/reducer'),
-          System.import('containers/HomePage'),
+          System.import('HomePage/reducer'),
+          System.import('HomePage'),
         ]).then(modules => {
           loadReducer(store, 'home')(modules[0]);
           loadModule(cb)(modules[1]);
@@ -32,14 +32,14 @@ export default function createRoutes(store) {
     }, {
       path: '/features',
       getComponent(location, cb) {
-        System.import('containers/FeaturePage')
+        System.import('FeaturePage')
           .then(loadModule(cb))
           .catch(errorLoading);
       },
     }, {
       path: '*',
       getComponent(location, cb) {
-        System.import('containers/NotFoundPage')
+        System.import('NotFoundPage')
           .then(loadModule(cb))
           .catch(errorLoading);
       },
