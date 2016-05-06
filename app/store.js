@@ -7,7 +7,7 @@ import { fromJS } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 
-import rootSagas from './sagas';
+import sagas from './sagas';
 import createReducer from './reducers';
 const sagaMiddleware = createSagaMiddleware();
 
@@ -21,11 +21,10 @@ export default function configureStore(initialState = {}, history) {
   )(createStore);
   const store = createStoreWithMiddleware(createReducer(), fromJS(initialState));
 
-  // Create hook for async sagas
-  store.runSaga = sagaMiddleware.run;
-
-  // Add sync sagas to middleware
-  if (rootSagas.length) rootSagas.map(store.runSaga);
+  // Add all sagas to the saga middleware
+  for (let i = 0; i < sagas.length; i++) {
+    sagaMiddleware.run(sagas[i]);
+  }
 
   // Make reducers hot reloadable, see http://mxs.is/googmo
   if (module.hot) {
@@ -46,10 +45,4 @@ export default function configureStore(initialState = {}, history) {
 export function injectAsyncReducer(store, name, asyncReducer) {
   store.asyncReducers[name] = asyncReducer; // eslint-disable-line
   store.replaceReducer(createReducer(store.asyncReducers));
-}
-/**
- * Inject an asynchronously loaded saga
- */
-export function injectAsyncSaga(store, saga) {
-  store.runSaga(saga);
 }
