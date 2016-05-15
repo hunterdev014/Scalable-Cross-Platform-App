@@ -24,7 +24,7 @@ describe('<HomePage />', () => {
     const renderedComponent = shallow(
       <HomePage
         loading={false}
-        error={{ message: 'Loading failed!' }}
+        error="Page not found"
       />
     );
     const ErrorComponent = () => (
