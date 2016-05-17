@@ -9,6 +9,7 @@ import React from 'react';
 import { HomePage } from './index';
 import RepoListItem from 'containers/RepoListItem';
 import List from 'components/List';
+import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
 
 describe('<HomePage />', () => {
@@ -20,17 +21,16 @@ describe('<HomePage />', () => {
   });
 
   it('should render an error if loading failed', () => {
-    const renderedComponent = mount(
+    const renderedComponent = shallow(
       <HomePage
         loading={false}
-        error={{ message: 'Loading failed!' }}
+        error="Page not found"
       />
     );
-    expect(
-      renderedComponent
-        .text()
-        .indexOf('Something went wrong, please try again!')
-      ).toBeGreaterThan(-1);
+    const ErrorComponent = () => (
+      <ListItem content={'Something went wrong, please try again!'} />
+    );
+    expect(renderedComponent.contains(ErrorComponent)).toEqual(true);
   });
 
   it('should render the repositories if loading was successful', () => {

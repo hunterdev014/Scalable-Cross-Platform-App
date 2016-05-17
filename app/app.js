@@ -17,10 +17,10 @@ import 'file?name=[name].[ext]!./.htaccess';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import FontFaceObserver from 'fontfaceobserver';
-import useScroll from 'react-router-scroll';
+import useScroll from 'scroll-behavior/lib/useScrollToTop';
 import configureStore from './store';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
@@ -45,9 +45,9 @@ const store = configureStore(initialState, browserHistory);
 // Sync history and store, as the react-router-redux reducer
 // is under the non-default key ("routing"), selectLocationState
 // must be provided for resolving how to retrieve the "route" in the state
-import { selectLocationState } from 'containers/App/selectors';
+import createSelectLocationState from 'selectors/selectLocationSelector';
 const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: selectLocationState(),
+  selectLocationState: createSelectLocationState(),
 });
 
 // Set up the router, wrapping all Routes in the App component
@@ -60,29 +60,7 @@ const rootRoute = {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router
-      history={history}
-      routes={rootRoute}
-      render={
-        // Scroll to top when going to a new page, imitating default browser
-        // behaviour
-        applyRouterMiddleware(
-          useScroll(
-            (prevProps, props) => {
-              if (!prevProps || !props) {
-                return true;
-              }
-
-              if (prevProps.location.pathname !== props.location.pathname) {
-                return [0, 0];
-              }
-
-              return true;
-            }
-          )
-        )
-      }
-    />
+    <Router history={useScroll(() => history)()} routes={rootRoute} />
   </Provider>,
   document.getElementById('app')
 );

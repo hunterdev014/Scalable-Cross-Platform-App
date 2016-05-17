@@ -6,7 +6,7 @@
  * otherwise it'll render a link with an onclick
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 import styles from './styles.css';
 
@@ -33,11 +33,11 @@ function Button(props) {
 }
 
 Button.propTypes = {
-  className: PropTypes.string,
-  handleRoute: PropTypes.func,
-  href: PropTypes.string,
-  onClick: PropTypes.func,
-  children: PropTypes.node.isRequired,
+  className: React.PropTypes.string,
+  handleRoute: React.PropTypes.func,
+  href: React.PropTypes.string,
+  onClick: React.PropTypes.func,
+  children: React.PropTypes.node.isRequired,
 };
 
 export default Button;

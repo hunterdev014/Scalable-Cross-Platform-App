@@ -34,6 +34,21 @@ module.exports = (options) => ({
     }, {
       test: /\.jpe?g$|\.gif$|\.png$/i,
       loader: 'url-loader?limit=10000',
+    }, { 
+      test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, 
+      loader: 'file?name=fonts/[name].[hash].[ext]&mimetype=application/font-woff' 
+    }, { 
+      test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, 
+      loader: 'file?name=fonts/[name].[hash].[ext]&mimetype=application/font-woff'
+    }, { 
+      test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, 
+      loader: 'file?name=fonts/[name].[hash].[ext]&mimetype=application/octet-stream' 
+    }, { 
+      test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, 
+      loader: 'file?name=fonts/[name].[hash].[ext]' 
+    }, { 
+      test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, 
+      loader: 'file?name=images/[name].[hash].[ext]&mimetype=image/svg+xml' 
     }, {
       test: /\.html$/,
       loader: 'html-loader',
@@ -44,15 +59,6 @@ module.exports = (options) => ({
     new webpack.ProvidePlugin({
       // make fetch available
       fetch: 'exports?self.fetch!whatwg-fetch',
-    }),
-
-    // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
-    // inside your code for any environment checks; UglifyJS will automatically
-    // drop any unreachable code.
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-      },
     }),
   ]),
   postcss: () => options.postcssPlugins,

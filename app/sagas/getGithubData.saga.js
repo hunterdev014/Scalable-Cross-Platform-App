@@ -10,18 +10,12 @@ import { LOAD_REPOS } from 'containers/App/constants';
 import { reposLoaded, repoLoadingError } from 'containers/App/actions';
 
 import request from 'utils/request';
-import { selectUsername } from 'containers/HomePage/selectors';
+import usernameSelector from 'selectors/usernameSelector';
 
-// Bootstrap sagas
-export default [
-  getGithubData,
-];
-
-// Individual exports for testing
 export function* getGithubData() {
   while (true) {
     yield take(LOAD_REPOS);
-    const username = yield select(selectUsername());
+    const username = yield select(usernameSelector());
     const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
 
     // Use call from redux-saga for easier testing

@@ -11,18 +11,18 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import { createSelector } from 'reselect';
 
-import {
-  selectRepos,
-  selectLoading,
-  selectError,
-} from 'containers/App/selectors';
+import usernameSelector from 'selectors/usernameSelector';
+import reposSelector from 'selectors/reposSelector';
+import loadingSelector from 'selectors/loadingSelector';
+import errorSelector from 'selectors/errorSelector';
 
 import {
-  selectUsername,
-} from './selectors';
+  changeUsername,
+} from './actions';
 
-import { changeUsername } from './actions';
-import { loadRepos } from '../App/actions';
+import {
+  loadRepos,
+} from '../App/actions';
 
 import RepoListItem from 'containers/RepoListItem';
 import Button from 'components/Button';
@@ -133,9 +133,9 @@ function mapDispatchToProps(dispatch) {
 
 // Wrap the component to inject dispatch and state into it
 export default connect(createSelector(
-  selectRepos(),
-  selectUsername(),
-  selectLoading(),
-  selectError(),
+  reposSelector(),
+  usernameSelector(),
+  loadingSelector(),
+  errorSelector(),
   (repos, username, loading, error) => ({ repos, username, loading, error })
 ), mapDispatchToProps)(HomePage);
