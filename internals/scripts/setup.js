@@ -7,7 +7,6 @@ var path = require('path');
 var fs   = require('fs');
 var animateProgress = require('./helpers/progress');
 var addCheckMark = require('./helpers/checkmark');
-var readline = require('readline');
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
@@ -21,7 +20,8 @@ cleanRepo(dir, function () {
   clearInterval(interval);
   process.stdout.write('\nInstalling dependencies... (This might take a while)');
   setTimeout(function () {
-    readline.cursorTo(process.stdout, 0);
+    process.stdout.clearLine();
+    process.stdout.cursorTo(0);
     interval = animateProgress('Installing dependencies');
   }, 500);
 
