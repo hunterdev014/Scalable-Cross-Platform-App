@@ -8,17 +8,16 @@
 
 import React from 'react';
 
-export default class App extends React.Component {
-
-  static propTypes = {
-    children: React.PropTypes.node,
-  };
-
-  render() {
-    return (
-      <div>
-        {props.children}
-      </div>
-    );
-  }
+function App(props) {
+  return (
+    <div>
+      {props.children}
+    </div>
+  );
 }
+
+App.propTypes = {
+  children: React.PropTypes.node,
+};
+
+export default App;
