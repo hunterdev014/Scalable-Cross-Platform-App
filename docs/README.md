@@ -31,7 +31,7 @@
    bundled with this project to demo some of its best features:
 
     ```Shell
-    npm run setup && npm start
+    npm setup && npm start
     ```
 
 1. Open [localhost:3000](http://localhost:3000) to see it in action.

@@ -11,18 +11,18 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import { createSelector } from 'reselect';
 
-import {
-  selectRepos,
-  selectLoading,
-  selectError,
-} from 'containers/App/selectors';
+import usernameSelector from 'selectors/usernameSelector';
+import reposSelector from 'selectors/reposSelector';
+import loadingSelector from 'selectors/loadingSelector';
+import errorSelector from 'selectors/errorSelector';
 
 import {
-  selectUsername,
-} from './selectors';
+  changeUsername,
+} from './actions';
 
-import { changeUsername } from './actions';
-import { loadRepos } from '../App/actions';
+import {
+  loadRepos,
+} from '../App/actions';
 
 import RepoListItem from 'containers/RepoListItem';
 import Button from 'components/Button';
@@ -62,7 +62,7 @@ export class HomePage extends React.Component {
     // Show an error if there is one
     } else if (this.props.error !== false) {
       const ErrorComponent = () => (
-        <ListItem item={'Something went wrong, please try again!'} />
+        <ListItem content={'Something went wrong, please try again!'} />
       );
       mainContent = (<List component={ErrorComponent} />);
 
@@ -133,9 +133,9 @@ function mapDispatchToProps(dispatch) {
 
 // Wrap the component to inject dispatch and state into it
 export default connect(createSelector(
-  selectRepos(),
-  selectUsername(),
-  selectLoading(),
-  selectError(),
+  reposSelector(),
+  usernameSelector(),
+  loadingSelector(),
+  errorSelector(),
   (repos, username, loading, error) => ({ repos, username, loading, error })
 ), mapDispatchToProps)(HomePage);
