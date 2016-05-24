@@ -9,7 +9,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
-import currentUserSelector from 'selectors/currentUserSelector';
+import { selectCurrentUser } from 'containers/App/selectors';
 
 import ListItem from 'components/ListItem';
 import IssueIcon from 'components/IssueIcon';
@@ -51,7 +51,7 @@ export class RepoListItem extends React.Component {
 
     // Render the content into a list item
     return (
-      <ListItem key={`repo-list-item-${item.full_name}`} content={content} />
+      <ListItem key={`repo-list-item-${item.full_name}`} item={content} />
     );
   }
 }
@@ -62,6 +62,6 @@ RepoListItem.propTypes = {
 };
 
 export default connect(createSelector(
-  currentUserSelector(),
+  selectCurrentUser(),
   (currentUser) => ({ currentUser })
 ))(RepoListItem);

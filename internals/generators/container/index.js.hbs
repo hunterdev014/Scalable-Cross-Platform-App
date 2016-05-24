@@ -6,23 +6,12 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-{{#if wantSelector}}
-
-import { createSelector } from 'reselect';
-{{#if selectorName}}
-import {{camelCase selectorName}}Selector from '{{camelCase selectorName}}Selector';
-{{else}}
-{{#each selectors }}
-import {{this}} from '{{this}}';
-{{/each}}
-{{/if}}
-{{/if}}
-
+import select{{properCase name}} from './selectors';
 {{#if wantCSS}}
 import styles from './styles.css';
 {{/if}}
 
-class {{ properCase name }} extends React.Component {
+export class {{ properCase name }} extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       {{#if wantCSS}}
@@ -30,10 +19,13 @@ class {{ properCase name }} extends React.Component {
       {{else}}
       <div>
       {{/if}}
+      This is {{properCase name}} container !
       </div>
     );
   }
 }
+
+const mapStateToProps = select{{properCase name}}();
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -41,23 +33,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-{{#if wantSelector}}
-export default connect(createSelector(
-  {{#if selectorName}}
-    {{camelCase selectorName}}Selector
-  {{else}}
-  {{#each selectors }}
-    {{this}}(),
-  {{/each}}
-  
-  {{/if}}
-), mapDispatchToProps)({{ properCase name }});
-{{else}}
-function mapStateToProps(state) {
-  return {
-
-  };
-}
-
 export default connect(mapStateToProps, mapDispatchToProps)({{ properCase name }});
-{{/if}}

@@ -32,11 +32,26 @@ module.exports = (options) => ({
       include: /node_modules/,
       loaders: ['style-loader', 'css-loader'],
     }, {
-      test: /\.jpe?g$|\.gif$|\.png$/i,
+      test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
       loader: 'url-loader?limit=10000',
+    }, {
+      test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+      loader: 'file?name=fonts/[name].[hash].[ext]&mimetype=application/font-woff',
+    }, {
+      test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+      loader: 'file?name=fonts/[name].[hash].[ext]&mimetype=application/font-woff',
+    }, {
+      test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+      loader: 'file?name=fonts/[name].[hash].[ext]&mimetype=application/octet-stream',
+    }, {
+      test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+      loader: 'file?name=fonts/[name].[hash].[ext]',
     }, {
       test: /\.html$/,
       loader: 'html-loader',
+    }, {
+      test: /\.json$/,
+      loader: 'json-loader',
     }],
   },
   plugins: options.plugins.concat([
