@@ -25,7 +25,7 @@ module.exports = (config) => {
     ],
 
     preprocessors: {
-      ['./test-bundler.js']: ['webpack', 'sourcemap'], // eslint-disable-line  no-useless-computed-key
+      ['./test-bundler.js']: ['webpack', 'sourcemap'],
     },
 
     webpack: webpackConfig,
@@ -47,7 +47,6 @@ module.exports = (config) => {
       reporters: [
         { type: 'lcov', subdir: 'lcov' },
         { type: 'html', subdir: 'html' },
-        { type: 'text-summary' },
       ],
     },
 

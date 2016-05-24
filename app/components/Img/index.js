@@ -5,7 +5,7 @@
  * Renders an image, enforcing the usage of the alt="" tag
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 function Img(props) {
   return (
@@ -15,9 +15,9 @@ function Img(props) {
 
 // We require the use of src and alt, only enforced by react in dev mode
 Img.propTypes = {
-  src: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-  className: PropTypes.string,
+  src: React.PropTypes.string.isRequired,
+  alt: React.PropTypes.string.isRequired,
+  className: React.PropTypes.string,
 };
 
 export default Img;

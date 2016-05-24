@@ -9,20 +9,20 @@
 
 <div align="center">
   <!-- Dependency Status -->
-  <a href="https://david-dm.org/mxstbr/react-boilerplate">
-    <img src="https://david-dm.org/mxstbr/react-boilerplate.svg" alt="Dependency Status" />
+  <a href="https://david-dm.org/mxstbr/react-boilerplate/v3.0.0">
+    <img src="https://david-dm.org/mxstbr/react-boilerplate/v3.0.0.svg" alt="Dependency Status" />
   </a>
   <!-- devDependency Status -->
-  <a href="https://david-dm.org/mxstbr/react-boilerplate#info=devDependencies">
-    <img src="https://david-dm.org/mxstbr/react-boilerplate/dev-status.svg" alt="devDependency Status" />
+  <a href="https://david-dm.org/mxstbr/react-boilerplate/v3.0.0#info=devDependencies">
+    <img src="https://david-dm.org/mxstbr/react-boilerplate/v3.0.0/dev-status.svg" alt="devDependency Status" />
   </a>
   <!-- Build Status -->
-  <a href="https://travis-ci.org/mxstbr/react-boilerplate">
-    <img src="https://travis-ci.org/mxstbr/react-boilerplate.svg" alt="Build Status" />
+  <a href="https://travis-ci.org/mxstbr/react-boilerplate?branch=v3.0.0">
+    <img src="https://travis-ci.org/mxstbr/react-boilerplate.svg?branch=v3.0.0" alt="Build Status" />
   </a>
   <!-- Test Coverage -->
-  <a href="https://coveralls.io/r/mxstbr/react-boilerplate">
-    <img src="https://coveralls.io/repos/github/mxstbr/react-boilerplate/badge.svg" alt="Test Coverage" />
+  <a href="https://coveralls.io/r/mxstbr/react-boilerplate?branch=v3.0.0">
+    <img src="https://coveralls.io/repos/github/mxstbr/react-boilerplate/badge.svg?branch=v3.0.0" alt="Test Coverage" />
   </a>
   <!-- Donations -->
   <a href="https://cash.me/$mxstbr">
@@ -43,7 +43,7 @@
   <dd>Create components, containers, routes, selectors and sagas - and their tests - right from the CLI!</dd>
 
   <dt>Instant feedback</dt>
-  <dd>Enjoy the best DX (Developer eXperience) and code your app at the speed of thought! Your saved changes to the CSS and JS are reflected instantaneously without refreshing the page. Preserve application state even when you update something in the underlying code!</dd>
+  <dd>Enjoy the best DX and code your app at the speed of thought! Your saved changes to the CSS and JS are reflected instantaneously without refreshing the page. Preserve application state even when you update something in the underlying code!</dd>
 
   <dt>Predictable state management</dt>
   <dd>Unidirectional data flow allows for change logging and time travel debugging.</dd>
