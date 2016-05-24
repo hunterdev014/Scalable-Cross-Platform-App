@@ -1,35 +1,42 @@
-/* istanbul ignore next */
-
 // These are the pages you can go to.
 // They are all wrapped in the App component, which should contain the navbar etc
 // See http://blog.mxstbr.com/2016/01/react-apps-with-pages for more information
-// about the require.ensure code splitting business
-import { injectAsyncReducer } from './store';
+// about the code splitting business
+// import { getHooks } from 'utils/hooks';
 
-function errorLoading(err) {
+const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
-}
+};
 
-function loadModule(cb) {
-  return (module) => cb(null, module.default);
-}
+const loadModule = (cb) => (componentModule) => {
+  cb(null, componentModule.default);
+};
 
-function loadReducer(store, name) { // eslint-disable-line
-  return (module) => injectAsyncReducer(store, name, module.default);
-}
+export default function createRoutes() {
+  // Create reusable async injectors using getHooks factory
+  // const { injectReducer, injectSagas } = getHooks(store);
 
-export default function createRoutes(store) { // eslint-disable-line
   return [
     {
       path: '/',
-      getComponent(location, cb) {
-        System.import('components/HomePage')
-          .then(loadModule(cb))
-          .catch(errorLoading);
+      name: 'home',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('components/HomePage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([component]) => {
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
       },
     }, {
       path: '*',
-      getComponent(location, cb) {
+      name: 'notfound',
+      getComponent(nextState, cb) {
         System.import('components/NotFoundPage')
           .then(loadModule(cb))
           .catch(errorLoading);
