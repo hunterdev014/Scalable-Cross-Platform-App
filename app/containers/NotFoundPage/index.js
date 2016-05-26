@@ -8,28 +8,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
-import { FormattedMessage } from 'react-intl';
 import Button from 'components/Button';
 import H1 from 'components/H1';
 
 export function NotFound(props) {
   return (
     <article>
-      <H1>
-        <FormattedMessage
-          id="boilerplate.containers.NotFoundPage.header"
-          defaultMessage={'Page not found.'}
-        />
-      </H1>
+      <H1>Page not found.</H1>
       <Button
         handleRoute={function redirect() {
           props.changeRoute('/');
         }}
       >
-        <FormattedMessage
-          id="boilerplate.containers.NotFoundPage.home"
-          defaultMessage={'Home'}
-        />
+        Home
       </Button>
     </article>
   );
