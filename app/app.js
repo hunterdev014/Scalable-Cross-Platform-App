@@ -17,7 +17,6 @@ import 'file?name=[name].[ext]!./.htaccess';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { IntlProvider } from 'react-intl';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import FontFaceObserver from 'fontfaceobserver';
@@ -61,31 +60,29 @@ const rootRoute = {
 
 ReactDOM.render(
   <Provider store={store}>
-    <IntlProvider locale="en">
-      <Router
-        history={history}
-        routes={rootRoute}
-        render={
-          // Scroll to top when going to a new page, imitating default browser
-          // behaviour
-          applyRouterMiddleware(
-            useScroll(
-              (prevProps, props) => {
-                if (!prevProps || !props) {
-                  return true;
-                }
-
-                if (prevProps.location.pathname !== props.location.pathname) {
-                  return [0, 0];
-                }
-
+    <Router
+      history={history}
+      routes={rootRoute}
+      render={
+        // Scroll to top when going to a new page, imitating default browser
+        // behaviour
+        applyRouterMiddleware(
+          useScroll(
+            (prevProps, props) => {
+              if (!prevProps || !props) {
                 return true;
               }
-            )
+
+              if (prevProps.location.pathname !== props.location.pathname) {
+                return [0, 0];
+              }
+
+              return true;
+            }
           )
-        }
-      />
-    </IntlProvider>
+        )
+      }
+    />
   </Provider>,
   document.getElementById('app')
 );
