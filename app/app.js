@@ -17,11 +17,15 @@ import 'file?name=[name].[ext]!./.htaccess';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { IntlProvider } from 'react-intl';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import FontFaceObserver from 'fontfaceobserver';
 import useScroll from 'react-router-scroll';
 import configureStore from './store';
+
+// Import bootloader
+import { translationMessages } from './bootloader';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -60,29 +64,31 @@ const rootRoute = {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router
-      history={history}
-      routes={rootRoute}
-      render={
-        // Scroll to top when going to a new page, imitating default browser
-        // behaviour
-        applyRouterMiddleware(
-          useScroll(
-            (prevProps, props) => {
-              if (!prevProps || !props) {
+    <IntlProvider locale="de" messages={translationMessages.en}>
+      <Router
+        history={history}
+        routes={rootRoute}
+        render={
+          // Scroll to top when going to a new page, imitating default browser
+          // behaviour
+          applyRouterMiddleware(
+            useScroll(
+              (prevProps, props) => {
+                if (!prevProps || !props) {
+                  return true;
+                }
+
+                if (prevProps.location.pathname !== props.location.pathname) {
+                  return [0, 0];
+                }
+
                 return true;
               }
-
-              if (prevProps.location.pathname !== props.location.pathname) {
-                return [0, 0];
-              }
-
-              return true;
-            }
+            )
           )
-        )
-      }
-    />
+        }
+      />
+    </IntlProvider>
   </Provider>,
   document.getElementById('app')
 );
