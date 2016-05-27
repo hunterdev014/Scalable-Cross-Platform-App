@@ -12,6 +12,7 @@ const addDevMiddlewares = (app, options) => {
     noInfo: true,
     publicPath: options.output.publicPath,
     silent: true,
+    watchOptions: options.watchOptions,
   });
 
   app.use(middleware);
