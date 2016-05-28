@@ -1,7 +1,7 @@
-/**
- * NotFoundPage
+/*
+ * HomePage
  *
- * This is the page we show when the user visits a url that doesn't have a route
+ * This is the first thing users see of our App, at the '/' route
  *
  * NOTE: while this component should technically be a stateless functional
  * component (SFC), hot reloading does not currently support SFCs. If hot
@@ -10,13 +10,17 @@
  */
 
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
 
 /* eslint-disable react/prefer-stateless-function */
-export default class NotFound extends React.Component {
+export default class HomePage extends React.Component {
 
   render() {
     return (
-      <h1>Page Not Found</h1>
+      <h1>
+        <FormattedMessage {...messages.header} />
+      </h1>
     );
   }
 }
