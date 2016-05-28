@@ -39,12 +39,8 @@ export default function configureStore(initialState = {}, history) {
   /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./reducers', () => {
-      System.import('./reducers').then((reducerModule) => {
-        const createReducers = reducerModule.default;
-        const nextReducers = createReducers(store.asyncReducers);
-
-        store.replaceReducer(nextReducers);
-      });
+      const nextRootReducer = require('./reducers').default; // eslint-disable-line global-require
+      store.replaceReducer(nextRootReducer);
     });
   }
 
