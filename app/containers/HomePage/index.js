@@ -24,7 +24,6 @@ import {
 import { changeUsername } from './actions';
 import { loadRepos } from '../App/actions';
 
-import { FormattedMessage } from 'react-intl';
 import RepoListItem from 'containers/RepoListItem';
 import Button from 'components/Button';
 import H2 from 'components/H2';
@@ -53,6 +52,15 @@ export class HomePage extends React.Component {
     this.openRoute('/features');
   };
 
+  /**
+   * when initial state username is not null, submit the form to load repos
+   */
+  componentDidMount() {
+    if (this.props.username.trim().length > 0) {
+      this.props.onSubmitForm();
+    }
+  };
+
   render() {
     let mainContent = null;
 
@@ -76,48 +84,14 @@ export class HomePage extends React.Component {
       <article>
         <div>
           <section className={`${styles.textSection} ${styles.centered}`}>
-            <H2>
-              <FormattedMessage
-                id="boilerplate.containers.HomePage.start_project.header"
-                defaultMessage={`
-                  Start your next react project in seconds
-                `}
-              />
-            </H2>
-            <p>
-              <FormattedMessage
-                id="boilerplate.containers.HomePage.start_project.message"
-                defaultMessage={`
-                  A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices
-                `}
-              />
-            </p>
+            <H2>Start your next react project in seconds</H2>
+            <p>A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices</p>
           </section>
           <section className={styles.textSection}>
-            <H2>
-              <FormattedMessage
-                id="boilerplate.containers.HomePage.tryme.header"
-                defaultMessage={`
-                  Try me!
-                `}
-              />
-            </H2>
+            <H2>Try me!</H2>
             <form className={styles.usernameForm} onSubmit={this.props.onSubmitForm}>
-              <label htmlFor="username">
-                <FormattedMessage
-                  id="boilerplate.containers.HomePage.tryme.message"
-                  defaultMessage={`
-                    Show Github repositories by
-                  `}
-                />
-                <span className={styles.atPrefix}>
-                  <FormattedMessage
-                    id="boilerplate.containers.HomePage.tryme.atPrefix"
-                    defaultMessage={`
-                      @
-                    `}
-                  />
-                </span>
+              <label htmlFor="username">Show Github repositories by
+                <span className={styles.atPrefix}>@</span>
                 <input
                   id="username"
                   className={styles.input}
@@ -130,12 +104,7 @@ export class HomePage extends React.Component {
             </form>
             {mainContent}
           </section>
-          <Button handleRoute={this.openFeaturesPage}>
-            <FormattedMessage
-              id="boilerplate.containers.HomePage.features.Button"
-              defaultMessage={'Features'}
-            />
-          </Button>
+          <Button handleRoute={this.openFeaturesPage}>Features</Button>
         </div>
       </article>
     );
@@ -163,7 +132,7 @@ function mapDispatchToProps(dispatch) {
     onChangeUsername: (evt) => dispatch(changeUsername(evt.target.value)),
     changeRoute: (url) => dispatch(push(url)),
     onSubmitForm: (evt) => {
-      evt.preventDefault();
+      evt && evt.preventDefault();
       dispatch(loadRepos());
     },
 
