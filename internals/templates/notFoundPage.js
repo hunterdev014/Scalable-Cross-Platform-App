@@ -11,7 +11,8 @@
 
 import React from 'react';
 
-export default class NotFound extends React.Component { // eslint-disable-line react/prefer-stateless-function
+/* eslint-disable react/prefer-stateless-function */
+export default class NotFound extends React.Component {
 
   render() {
     return (
