@@ -10,12 +10,17 @@
  */
 
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
 
-export default class NotFound extends React.Component { // eslint-disable-line react/prefer-stateless-function
+/* eslint-disable react/prefer-stateless-function */
+export default class NotFound extends React.Component {
 
   render() {
     return (
-      <h1>Page Not Found</h1>
+      <h1>
+        <FormattedMessage {...messages.header} />
+      </h1>
     );
   }
 }

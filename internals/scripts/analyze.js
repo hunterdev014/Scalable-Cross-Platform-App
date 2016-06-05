@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable */
 
 var shelljs = require('shelljs');
 var animateProgress = require('./helpers/progress');
