@@ -1,4 +1,3 @@
-/* eslint-disable */
 require('shelljs/global');
 
 /**
@@ -27,13 +26,15 @@ rm('-rf', 'app/components/*');
 // Cleanup containers folder
 rm('-rf', 'app/containers/*');
 mkdir('app/containers/App');
-mkdir('app/components/NotFoundPage');
-mkdir('app/components/HomePage');
+mkdir('app/containers/NotFoundPage');
+mkdir('app/containers/HomePage');
 cp('internals/templates/appContainer.js', 'app/containers/App/index.js');
-cp('internals/templates/notFoundPage/notFoundPage.js', 'app/components/NotFoundPage/index.js');
-cp('internals/templates/notFoundPage/notFoundPageMessages.js', 'app/components/NotFoundPage/messages.js');
-cp('internals/templates/homePage/homePage.js', 'app/components/HomePage/index.js');
-cp('internals/templates/homePage/messages.js', 'app/components/HomePage/messages.js');
+cp('internals/templates/notFoundPage/notFoundPage.js', 'app/containers/NotFoundPage/index.js');
+cp('internals/templates/notFoundPage/notFoundPageMessages.js', 'app/containers/NotFoundPage/messages.js');
+cp('internals/templates/homePage/homePage.js', 'app/containers/HomePage/index.js');
+cp('internals/templates/homePage/messages.js', 'app/containers/HomePage/messages.js');
+cp('internals/templates/notFoundPage.js', 'app/containers/NotFoundPage/index.js');
+cp('internals/templates/homePage.js', 'app/containers/HomePage/index.js');
 
 // Copy selectors
 mkdir('app/containers/App/tests');
