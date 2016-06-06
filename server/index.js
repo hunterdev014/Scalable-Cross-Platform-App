@@ -6,7 +6,6 @@ const ngrok = require('ngrok');
 
 const frontend = require('./middlewares/frontendMiddleware');
 const isDev = process.env.NODE_ENV !== 'production';
-const useTunnel = isDev && process.env.ENABLE_TUNNEL;
 
 const app = express();
 
@@ -25,11 +24,11 @@ const port = process.env.PORT || 3000;
 // Start your app.
 app.listen(port, (err) => {
   if (err) {
-    return logger.error(err.message);
+    return logger.error(err);
   }
 
   // Connect to ngrok in dev mode
-  if (isDev && useTunnel) {
+  if (isDev) {
     ngrok.connect(port, (innerErr, url) => {
       if (innerErr) {
         return logger.error(innerErr);
