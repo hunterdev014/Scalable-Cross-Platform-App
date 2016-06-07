@@ -33,11 +33,6 @@ module.exports = {
     name: 'wantSagas',
     default: true,
     message: 'Do you want sagas for asynchronous flows? (e.g. fetching data)',
-  }, {
-    type: 'confirm',
-    name: 'wantMessages',
-    default: true,
-    message: 'Do you want i18n messages (i.e. will this component use text)?',
   }],
   actions: data => {
     // Generate index.js and index.test.js
@@ -59,16 +54,6 @@ module.exports = {
         type: 'add',
         path: '../../app/containers/{{properCase name}}/styles.css',
         templateFile: './container/styles.css.hbs',
-        abortOnFail: true,
-      });
-    }
-
-    // If component wants messages
-    if (data.wantMessages) {
-      actions.push({
-        type: 'add',
-        path: '../../app/containers/{{properCase name}}/messages.js',
-        templateFile: './container/messages.js.hbs',
         abortOnFail: true,
       });
     }
@@ -128,7 +113,7 @@ module.exports = {
       actions.push({ // Add the reducer to the reducer.js file
         type: 'modify',
         path: '../../app/reducers.js',
-        pattern: /(\.\.\.asyncReducers,\n\s{0,}}\);)/gi,
+        pattern: /(\.\.\.asyncReducers,\n {2}}\);)/gi,
         template: '{{camelCase name}}: {{camelCase name}}Reducer,\n    $1',
       });
       actions.push({

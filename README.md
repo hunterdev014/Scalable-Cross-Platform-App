@@ -24,8 +24,6 @@
   <a href="https://coveralls.io/r/mxstbr/react-boilerplate">
     <img src="https://coveralls.io/repos/github/mxstbr/react-boilerplate/badge.svg" alt="Test Coverage" />
   </a>
-</div>
-<div align="center">
     <!-- Backers -->
   <a href="#backers">
     <img src="https://opencollective.com/react-boilerplate/backers/badge.svg" alt="Backers" />
@@ -33,10 +31,6 @@
       <!-- Sponsors -->
   <a href="#sponsors">
     <img src="https://opencollective.com/react-boilerplate/sponsors/badge.svg" alt="Sponsors" />
-  </a>
-  <!-- Gitter -->
-  <a href="https://gitter.im/mxstbr/react-boilerplate">
-    <img src="https://camo.githubusercontent.com/54dc79dc7da6b76b17bc8013342da9b4266d993c/68747470733a2f2f6261646765732e6769747465722e696d2f6d78737462722f72656163742d626f696c6572706c6174652e737667" alt="Gitter Chat" />
   </a>
 </div>
 
@@ -66,9 +60,6 @@
 
   <dt>Industry-standard routing</dt>
   <dd>It's natural to want to add pages (e.g. `/about`) to your application, and routing makes this possible.</dd>
-
-  <dt>Industry-standard i18n internationalization support</dt>
-  <dd>Scalable apps need to support multiple languages, easily add and support multiple languages with `react-intl`.</dd>
 
   <dt>Offline-first</dt>
   <dd>The next frontier in performant web apps: availability without a network connection from the instant your users load the app.</dd>

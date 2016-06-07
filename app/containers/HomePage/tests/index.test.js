@@ -6,7 +6,6 @@ import expect from 'expect';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 
-import { IntlProvider } from 'react-intl';
 import { HomePage } from '../index';
 import RepoListItem from 'containers/RepoListItem';
 import List from 'components/List';
@@ -22,12 +21,10 @@ describe('<HomePage />', () => {
 
   it('should render an error if loading failed', () => {
     const renderedComponent = mount(
-      <IntlProvider locale="en">
-        <HomePage
-          loading={false}
-          error={{ message: 'Loading failed!' }}
-        />
-      </IntlProvider>
+      <HomePage
+        loading={false}
+        error={{ message: 'Loading failed!' }}
+      />
     );
     expect(
       renderedComponent
@@ -67,9 +64,7 @@ describe('<HomePage />', () => {
     };
 
     const renderedComponent = mount(
-      <IntlProvider locale="en">
-        <HomePage loading changeRoute={openRoute} />
-      </IntlProvider>
+      <HomePage loading changeRoute={openRoute} />
     );
     const button = renderedComponent.find('button');
     button.simulate('click');

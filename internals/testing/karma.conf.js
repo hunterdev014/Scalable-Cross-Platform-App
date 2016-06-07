@@ -5,10 +5,12 @@ module.exports = (config) => {
   config.set({
     frameworks: ['mocha'],
     reporters: ['coverage', 'mocha'],
-    browsers: process.env.TRAVIS // eslint-disable-line no-nested-ternary
+    /*eslint-disable */
+    browsers: process.env.TRAVIS
       ? ['ChromeTravis']
       : process.env.APPVEYOR
         ? ['IE'] : ['Chrome'],
+    /*eslint-enable */
 
     autoWatch: false,
     singleRun: true,
@@ -23,7 +25,7 @@ module.exports = (config) => {
     ],
 
     preprocessors: {
-      ['./test-bundler.js']: ['webpack', 'sourcemap'], // eslint-disable-line no-useless-computed-key
+      ['./test-bundler.js']: ['webpack', 'sourcemap'], // eslint-disable-line  no-useless-computed-key
     },
 
     webpack: webpackConfig,

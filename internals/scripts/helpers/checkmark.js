@@ -1,3 +1,4 @@
+/* eslint-disable */
 var chalk = require('chalk');
 
 /**

@@ -3,20 +3,21 @@
  *
  * Lists the name and the issue count of a repository
  */
+/* eslint-disable react/prefer-stateless-function */
 
 import React from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
-import { FormattedNumber } from 'react-intl';
 import { selectCurrentUser } from 'containers/App/selectors';
+
 import ListItem from 'components/ListItem';
 import IssueIcon from 'components/IssueIcon';
 import A from 'components/A';
 
 import styles from './styles.css';
 
-export class RepoListItem extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class RepoListItem extends React.Component {
   render() {
     const item = this.props.item;
     let nameprefix = '';
@@ -43,7 +44,7 @@ export class RepoListItem extends React.Component { // eslint-disable-line react
           target="_blank"
         >
           <IssueIcon className={styles.issueIcon} />
-          <FormattedNumber value={item.open_issues_count} />
+          {item.open_issues_count}
         </A>
       </div>
     );
