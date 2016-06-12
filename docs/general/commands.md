@@ -94,14 +94,7 @@ $ npm run test
 ```
 
 Tests your application with the unit tests specified in the `*test.js` files
-throughout the application.  
-All the `test` commands allow an optional `-- --grep string` argument to filter
-the tests ran by Karma. Useful if you need to run a specific test only.
-
-```Shell
-# Run only the Button component tests
-$ npm run test:watch -- --grep Button
-```
+throughout the application.
 
 ### Browsers
 
@@ -188,3 +181,4 @@ $ npm run lint:css
 ```
 
 Only lints your CSS.
+
