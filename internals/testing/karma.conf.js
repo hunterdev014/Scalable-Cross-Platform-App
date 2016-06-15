@@ -1,5 +1,4 @@
 const webpackConfig = require('../webpack/webpack.test.babel');
-const argv = require('minimist')(process.argv.slice(2));
 const path = require('path');
 
 module.exports = (config) => {
@@ -13,12 +12,6 @@ module.exports = (config) => {
 
     autoWatch: false,
     singleRun: true,
-
-    client: {
-      mocha: {
-        grep: argv.grep,
-      },
-    },
 
     files: [
       {

@@ -3,13 +3,12 @@
 ## Table of Contents
 
 - [General](general)
-  - [**CLI Commands**](general/commands.md)
-  - [Tool Configuration](general/files.md)
-  - [Server Configurations](general/server-configs.md)
-  - [Deployment](general/deployment.md) *(currently Heroku specific)*
-  - [FAQ](general/faq.md)
-  - [Gotchas](general/gotchas.md)
-  - [Remove](general/remove.md)
+  - [**CLI Commands**](commands.md)
+  - [Tool Configuration](files.md)
+  - [Server Configurations](server-configs.md)
+  - [Deployment](deployment.md) *(currently Heroku specific)*
+  - [FAQ](faq.md)
+  - [Gotchas](gotchas.md)
 - [Testing](testing)
   - [Unit Testing](testing/unit-testing.md)
   - [Component Testing](testing/component-testing.md)
@@ -23,6 +22,7 @@
   - [ImmutableJS](js/immutablejs.md)
   - [reselect](js/reselect.md)
   - [redux-saga](js/redux-saga.md)
+  - [i18n](js/i18n.md)
   - [routing](js/routing.md)
 
 ## Overview
@@ -104,12 +104,6 @@ JavaScript side of things.
 
 For a thorough explanation of the testing procedure, see the
 [testing documentation](./testing/README.md)!
-
-#### Performance testing
-
-With the production server running (i.e. while `$ npm run serve` is running in
-another tab), enter `$ npm run pagespeed` to run Google PageSpeed Insights and
-get a performance check right in your terminal!
 
 #### Browser testing
 
