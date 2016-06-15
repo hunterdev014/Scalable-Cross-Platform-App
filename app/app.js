@@ -23,9 +23,6 @@ import FontFaceObserver from 'fontfaceobserver';
 import useScroll from 'react-router-scroll';
 import configureStore from './store';
 
-// Import Language Provider
-import LanguageProvider from 'containers/LanguageProvider';
-
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
 import styles from 'containers/App/styles.css';
@@ -37,9 +34,6 @@ openSansObserver.check().then(() => {
 }, () => {
   document.body.classList.remove(styles.fontLoaded);
 });
-
-// Import i18n messages
-import { translationMessages } from './i18n';
 
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router
@@ -64,31 +58,20 @@ const rootRoute = {
   childRoutes: createRoutes(store),
 };
 
-const render = () => {
-  ReactDOM.render(
-    <Provider store={store}>
-      <LanguageProvider messages={translationMessages}>
-        <Router
-          history={history}
-          routes={rootRoute}
-          render={
-            // Scroll to top when going to a new page, imitating default browser
-            // behaviour
-            applyRouterMiddleware(useScroll())
-          }
-        />
-      </LanguageProvider>
-    </Provider>,
-    document.getElementById('app')
-  );
-};
-
-// Chunked polyfill for browsers without Intl support
-if (!window.Intl) {
-  System.import('intl').then(render);
-} else {
-  render();
-}
+ReactDOM.render(
+  <Provider store={store}>
+    <Router
+      history={history}
+      routes={rootRoute}
+      render={
+        // Scroll to top when going to a new page, imitating default browser
+        // behaviour
+        applyRouterMiddleware(useScroll())
+      }
+    />
+  </Provider>,
+  document.getElementById('app')
+);
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,

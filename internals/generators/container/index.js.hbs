@@ -1,6 +1,6 @@
 /*
  *
- * {{properCase name }}
+ * {{ properCase name }}
  *
  */
 
@@ -8,10 +8,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 {{#if wantActionsAndReducer}}
 import select{{properCase name}} from './selectors';
-{{/if}}
-{{#if wantMessages}}
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 {{/if}}
 {{#if wantCSS}}
 import styles from './styles.css';
@@ -25,9 +21,7 @@ export class {{ properCase name }} extends React.Component { // eslint-disable-l
       {{else}}
       <div>
       {{/if}}
-      {{#if wantMessages}}
-        <FormattedMessage {...messages.header} />
-      {{/if}}
+      This is {{properCase name}} container !
       </div>
     );
   }
