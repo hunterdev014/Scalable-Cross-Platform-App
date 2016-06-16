@@ -23,6 +23,7 @@
   - [ImmutableJS](js/immutablejs.md)
   - [reselect](js/reselect.md)
   - [redux-saga](js/redux-saga.md)
+  - [i18n](js/i18n.md)
   - [routing](js/routing.md)
 
 ## Overview
@@ -104,12 +105,6 @@ JavaScript side of things.
 
 For a thorough explanation of the testing procedure, see the
 [testing documentation](./testing/README.md)!
-
-#### Performance testing
-
-With the production server running (i.e. while `$ npm run serve` is running in
-another tab), enter `$ npm run pagespeed` to run Google PageSpeed Insights and
-get a performance check right in your terminal!
 
 #### Browser testing
 

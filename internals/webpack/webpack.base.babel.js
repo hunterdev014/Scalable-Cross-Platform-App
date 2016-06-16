@@ -47,8 +47,11 @@ module.exports = (options) => ({
       test: /\.json$/,
       loader: 'json-loader',
     }, {
-      test: /\.(mp4|webm)$/,
-      loader: 'url-loader?limit=10000',
+      test: /\.mp4$/,
+      loader: 'url?limit=10000&mimetype=video/mp4',
+    }, {
+      test: /\.webm$/,
+      loader: 'url?limit=10000&mimetype=video/webm',
     }],
   },
   plugins: options.plugins.concat([

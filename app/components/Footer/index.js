@@ -1,16 +1,27 @@
 import React from 'react';
 
+import messages from './messages';
 import A from 'components/A';
 import styles from './styles.css';
+import { FormattedMessage } from 'react-intl';
 
 function Footer() {
   return (
     <footer className={styles.footer}>
       <section>
-        <p>This project is licensed under the MIT license.</p>
+        <p>
+          <FormattedMessage {...messages.licenseMessage} />
+        </p>
       </section>
       <section>
-        <p>Made with love by <A href="https://twitter.com/mxstbr">Max Stoiber</A>.</p>
+        <p>
+          <FormattedMessage
+            {...messages.authorMessage}
+            values={{
+              author: <A href="https://twitter.com/mxstbr">Max Stoiber</A>,
+            }}
+          />
+        </p>
       </section>
     </footer>
   );
