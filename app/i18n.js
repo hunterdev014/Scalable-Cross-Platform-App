@@ -29,6 +29,10 @@ export const formatTranslationMessages = (messages) => {
   return formattedMessages;
 };
 
+if (module.hot) {
+  module.hot.accept();
+}
+
 export const translationMessages = {
   en: formatTranslationMessages(enTranslationMessages),
   de: formatTranslationMessages(deTranslationMessages),
