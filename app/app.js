@@ -23,9 +23,6 @@ import FontFaceObserver from 'fontfaceobserver';
 import useScroll from 'react-router-scroll';
 import configureStore from './store';
 
-// Import Language Provider
-import LanguageProvider from 'containers/LanguageProvider';
-
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
 import styles from 'containers/App/styles.css';
@@ -37,9 +34,6 @@ openSansObserver.check().then(() => {
 }, () => {
   document.body.classList.remove(styles.fontLoaded);
 });
-
-// Import i18n messages
-import { translationMessages, formatTranslationMessages } from './i18n';
 
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router
@@ -73,43 +67,20 @@ const rootRoute = {
   childRoutes: createRoutes(store),
 };
 
-const render = (translatedMessages) => {
-  ReactDOM.render(
-    <Provider store={store}>
-      <LanguageProvider messages={translatedMessages}>
-        <Router
-          history={history}
-          routes={rootRoute}
-          render={
-            // Scroll to top when going to a new page, imitating default browser
-            // behaviour
-            applyRouterMiddleware(useScroll())
-          }
-        />
-      </LanguageProvider>
-    </Provider>,
-    document.getElementById('app')
-  );
-};
-
-// Hot reloadable translation json files
-if (module.hot) {
-  Object.keys(translationMessages).forEach((locale) => {
-    module.hot.accept(`./translations/${locale}.json`, () => {
-      System.import(`./translations/${locale}.json`).then((translation) => {
-        translationMessages[locale] = formatTranslationMessages(translation);
-        render(translationMessages);
-      });
-    });
-  });
-}
-
-// Chunked polyfill for browsers without Intl support
-if (!window.Intl) {
-  System.import('intl').then(() => render(translationMessages));
-} else {
-  render(translationMessages);
-}
+ReactDOM.render(
+  <Provider store={store}>
+    <Router
+      history={history}
+      routes={rootRoute}
+      render={
+        // Scroll to top when going to a new page, imitating default browser
+        // behaviour
+        applyRouterMiddleware(useScroll())
+      }
+    />
+  </Provider>,
+  document.getElementById('app')
+);
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,
