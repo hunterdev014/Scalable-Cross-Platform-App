@@ -8,7 +8,7 @@ import 'babel-polyfill';
 
 // TODO constrain eslint import/no-unresolved rule to this block
 // Load the manifest.json file and the .htaccess file
-import 'file?name=[name].[ext]!./manifest.json';  // eslint-disable-line import/no-unresolved
+import '!file?name=[name].[ext]!./manifest.json';  // eslint-disable-line import/no-unresolved
 import 'file?name=[name].[ext]!./.htaccess';      // eslint-disable-line import/no-unresolved
 
 // Import all the third party stuff
@@ -18,14 +18,10 @@ import { Provider } from 'react-redux';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import useScroll from 'react-router-scroll';
-import { LanguageProvider } from 'containers/LanguageProvider';
 import configureStore from './store';
 
-// Import i18n messages
-import { translationMessages } from './i18n';
-
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
-import 'sanitize.css/lib/sanitize.css';
+import 'sanitize.css/sanitize.css';
 
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router
@@ -52,17 +48,15 @@ const rootRoute = {
 
 ReactDOM.render(
   <Provider store={store}>
-    <LanguageProvider messages={translationMessages}>
-      <Router
-        history={history}
-        routes={rootRoute}
-        render={
-          // Scroll to top when going to a new page, imitating default browser
-          // behaviour
-          applyRouterMiddleware(useScroll())
-        }
-      />
-    </LanguageProvider>
+    <Router
+      history={history}
+      routes={rootRoute}
+      render={
+        // Scroll to top when going to a new page, imitating default browser
+        // behaviour
+        applyRouterMiddleware(useScroll())
+      }
+    />
   </Provider>,
   document.getElementById('app')
 );
