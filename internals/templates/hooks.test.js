@@ -1,9 +1,9 @@
 /**
- * Test async injectors
+ * Test hooks
  */
 
 import expect from 'expect';
-import configureStore from '../../store';
+import configureStore from 'store.js';
 import { memoryHistory } from 'react-router';
 import { put } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
@@ -11,8 +11,8 @@ import { fromJS } from 'immutable';
 import {
   injectAsyncReducer,
   injectAsyncSagas,
-  getAsyncInjectors,
-} from '../asyncInjectors';
+  getHooks,
+} from 'utils/hooks';
 
 // Fixtures
 
@@ -33,16 +33,16 @@ const sagas = [
   },
 ];
 
-describe('asyncInjectors', () => {
+describe('hooks', () => {
   let store;
 
-  describe('getAsyncInjectors', () => {
+  describe('getHooks', () => {
     before(() => {
       store = configureStore({}, memoryHistory);
     });
 
-    it('given a store, should return all async injectors', () => {
-      const { injectReducer, injectSagas } = getAsyncInjectors(store);
+    it('given a store, should return all hooks', () => {
+      const { injectReducer, injectSagas } = getHooks(store);
 
       injectReducer('test', reducer);
       injectSagas(sagas);
