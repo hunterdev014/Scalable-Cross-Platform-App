@@ -6,7 +6,6 @@ import expect from 'expect';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 
-import { IntlProvider, FormattedMessage } from 'react-intl';
 import { NotFound } from '../index';
 import H1 from 'components/H1';
 import Button from 'components/Button';
@@ -16,13 +15,7 @@ describe('<NotFound />', () => {
     const renderedComponent = shallow(
       <NotFound />
     );
-    expect(renderedComponent.contains(
-      <H1>
-        <FormattedMessage
-          id="boilerplate.containers.NotFoundPage.header"
-          defaultMessage={'Page not found.'}
-        />
-      </H1>)).toEqual(true);
+    expect(renderedComponent.contains(<H1>Page not found.</H1>)).toEqual(true);
   });
 
   it('should render a button', () => {
@@ -42,9 +35,7 @@ describe('<NotFound />', () => {
     };
 
     const renderedComponent = mount(
-      <IntlProvider locale="en">
-        <NotFound changeRoute={onChangeRoute} />
-      </IntlProvider>
+      <NotFound changeRoute={onChangeRoute} />
     );
     const button = renderedComponent.find('button');
     button.simulate('click');
