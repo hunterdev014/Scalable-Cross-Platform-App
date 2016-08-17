@@ -16,8 +16,20 @@ import H1 from 'components/H1';
 import styles from './styles.css';
 
 export class FeaturePage extends React.Component {
+  /**
+   * Changes the route
+   *
+   * @param  {string} route The route we want to go to
+   */
+  openRoute = (route) => {
+    this.props.changeRoute(route);
+  };
+
+  /**
+   * Changed route to '/'
+   */
   openHomePage = () => {
-    this.props.dispatch(push('/'));
+    this.openRoute('/');
   };
 
   render() {
@@ -85,9 +97,14 @@ export class FeaturePage extends React.Component {
     );
   }
 }
-
 FeaturePage.propTypes = {
-  dispatch: React.PropTypes.func,
+  changeRoute: React.PropTypes.func,
 };
 
-export default connect()(FeaturePage);
+function mapDispatchToProps(dispatch) {
+  return {
+    changeRoute: (url) => dispatch(push(url)),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(FeaturePage);
