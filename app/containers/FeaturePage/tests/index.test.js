@@ -1,9 +1,8 @@
 import expect from 'expect';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import React from 'react';
 
-import Button from 'components/Button';
-import { FormattedMessage } from 'react-intl';
+import { IntlProvider, FormattedMessage } from 'react-intl';
 import messages from '../messages';
 import { FeaturePage } from '../index';
 import H1 from 'components/H1';
@@ -20,17 +19,23 @@ describe('<FeaturePage />', () => {
     )).toEqual(true);
   });
 
-  it('should link to "/"', (done) => {
+  it('should link to "/"', () => {
+    const openRouteSpy = expect.createSpy();
+
     // Spy on the openRoute method of the FeaturePage
-    const dispatch = (action) => {
-      expect(action.payload.args).toEqual('/');
-      done();
+    const openRoute = (dest) => {
+      if (dest === '/') {
+        openRouteSpy();
+      }
     };
 
-    const renderedComponent = shallow(
-      <FeaturePage dispatch={dispatch} />
+    const renderedComponent = mount(
+      <IntlProvider locale="en">
+        <FeaturePage changeRoute={openRoute} />
+      </IntlProvider>
     );
-    const button = renderedComponent.find(Button);
-    button.prop('handleRoute')();
+    const button = renderedComponent.find('button');
+    button.simulate('click');
+    expect(openRouteSpy).toHaveBeenCalled();
   });
 });

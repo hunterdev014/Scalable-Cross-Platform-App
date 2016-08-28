@@ -4,7 +4,7 @@
 const exec = require('child_process').exec;
 
 module.exports = {
-  description: 'Add a language',
+  description: 'Add a langauge',
   prompts: [{
     type: 'input',
     name: 'language',
