@@ -1,5 +1,4 @@
 import App from '../index';
-import Header from 'components/Header';
 import Footer from 'components/Footer';
 
 import expect from 'expect';
@@ -7,11 +6,11 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 describe('<App />', () => {
-  it('should render the header', () => {
+  it('should render the logo', () => {
     const renderedComponent = shallow(
       <App />
     );
-    expect(renderedComponent.find(Header).length).toEqual(1);
+    expect(renderedComponent.find('Img').length).toEqual(1);
   });
 
   it('should render its children', () => {
