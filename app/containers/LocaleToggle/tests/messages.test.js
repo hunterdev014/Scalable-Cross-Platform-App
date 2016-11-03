@@ -1,3 +1,4 @@
+import assert from 'assert';
 import { getLocaleMessages } from '../messages';
 
 describe('getLocaleMessages', () => {
@@ -15,6 +16,6 @@ describe('getLocaleMessages', () => {
 
     const actual = getLocaleMessages(['en', 'fr']);
 
-    expect(actual).toEqual(expected);
+    assert.deepEqual(expected, actual);
   });
 });

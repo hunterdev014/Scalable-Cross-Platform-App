@@ -2,6 +2,7 @@
  * Test async injectors
  */
 
+import expect from 'expect';
 import configureStore from '../../store';
 import { memoryHistory } from 'react-router';
 import { put } from 'redux-saga/effects';
@@ -38,7 +39,7 @@ describe('asyncInjectors', () => {
   let store;
 
   describe('getAsyncInjectors', () => {
-    beforeAll(() => {
+    before(() => {
       store = configureStore({}, memoryHistory);
     });
 
@@ -65,12 +66,12 @@ describe('asyncInjectors', () => {
         result = err.name === 'Invariant Violation';
       }
 
-      expect(result).toBe(true);
+      expect(result).toEqual(true);
     });
   });
 
   describe('helpers', () => {
-    beforeAll(() => {
+    before(() => {
       store = configureStore({}, memoryHistory);
     });
 
@@ -103,7 +104,7 @@ describe('asyncInjectors', () => {
           result = err.name === 'Invariant Violation';
         }
 
-        expect(result).toBe(true);
+        expect(result).toEqual(true);
       });
 
       it('should throw if passed invalid reducer', () => {
@@ -123,7 +124,7 @@ describe('asyncInjectors', () => {
           result = err.name === 'Invariant Violation';
         }
 
-        expect(result).toBe(true);
+        expect(result).toEqual(true);
       });
     });
 
@@ -156,7 +157,7 @@ describe('asyncInjectors', () => {
           result = err.name === 'Invariant Violation';
         }
 
-        expect(result).toBe(true);
+        expect(result).toEqual(true);
       });
     });
   });

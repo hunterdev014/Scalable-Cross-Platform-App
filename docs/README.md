@@ -10,7 +10,6 @@
   - [FAQ](general/faq.md)
   - [Gotchas](general/gotchas.md)
   - [Remove](general/remove.md)
-  - [Extracting components](general/components.md)
 - [Testing](testing)
   - [Unit Testing](testing/unit-testing.md)
   - [Component Testing](testing/component-testing.md)

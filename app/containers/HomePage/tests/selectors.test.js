@@ -1,4 +1,5 @@
 import { fromJS } from 'immutable';
+import expect from 'expect';
 
 import {
   selectHome,

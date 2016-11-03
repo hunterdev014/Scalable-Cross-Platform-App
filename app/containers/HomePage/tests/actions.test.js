@@ -1,3 +1,5 @@
+import expect from 'expect';
+
 import {
   CHANGE_USERNAME,
 } from '../constants';
