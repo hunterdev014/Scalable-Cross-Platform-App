@@ -2,15 +2,18 @@
  * Tests for HomePage sagas
  */
 
+import expect from 'expect';
 import { takeLatest } from 'redux-saga';
-import { take, put, fork } from 'redux-saga/effects';
-
+import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import { getRepos, getReposWatcher, githubData } from '../sagas';
 
 import { LOAD_REPOS } from 'containers/App/constants';
 import { reposLoaded, repoLoadingError } from 'containers/App/actions';
+
+import request from 'utils/request';
+import { selectUsername } from 'containers/HomePage/selectors';
 
 const username = 'mxstbr';
 
@@ -23,10 +26,11 @@ describe('getRepos Saga', () => {
     getReposGenerator = getRepos();
 
     const selectDescriptor = getReposGenerator.next().value;
-    expect(selectDescriptor).toMatchSnapshot();
+    expect(selectDescriptor).toEqual(select(selectUsername()));
 
+    const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
     const callDescriptor = getReposGenerator.next(username).value;
-    expect(callDescriptor).toMatchSnapshot();
+    expect(callDescriptor).toEqual(call(request, requestURL));
   });
 
   it('should dispatch the reposLoaded action if it requests the data successfully', () => {
@@ -69,4 +73,12 @@ describe('githubDataSaga Saga', () => {
     const takeDescriptor = githubDataSaga.next();
     expect(takeDescriptor.value).toEqual(take(LOCATION_CHANGE));
   });
+
+  it('should finally cancel() the forked getReposWatcher saga',
+     function* githubDataSagaCancellable() {
+      // reuse open fork for more integrated approach
+       forkDescriptor = githubDataSaga.next(put(LOCATION_CHANGE));
+       expect(forkDescriptor.value).toEqual(cancel(forkDescriptor));
+     }
+   );
 });

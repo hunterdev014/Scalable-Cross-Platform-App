@@ -1,3 +1,4 @@
+import expect from 'expect';
 import { render } from 'enzyme';
 import React from 'react';
 
@@ -9,7 +10,7 @@ describe('<List />', () => {
     const renderedComponent = render(
       <List component={ListItem} />
     );
-    expect(renderedComponent.find(ListItem)).toBeDefined();
+    expect(renderedComponent.find(ListItem)).toExist();
   });
 
   it('should render the items', () => {
@@ -20,6 +21,6 @@ describe('<List />', () => {
     const renderedComponent = render(
       <List items={items} component={ListItem} />
     );
-    expect(renderedComponent.find(items)).toBeDefined();
+    expect(renderedComponent.find(items)).toExist();
   });
 });

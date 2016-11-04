@@ -2,6 +2,7 @@ import {
   selectLanguage,
 } from '../selectors';
 import { fromJS } from 'immutable';
+import expect from 'expect';
 
 describe('selectLanguage', () => {
   const globalSelector = selectLanguage();

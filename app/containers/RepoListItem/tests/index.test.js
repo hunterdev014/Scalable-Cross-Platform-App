@@ -2,6 +2,7 @@
  * Test the repo list item
  */
 
+import expect from 'expect';
 import { shallow, render } from 'enzyme';
 import React from 'react';
 
@@ -35,7 +36,7 @@ describe('<RepoListItem />', () => {
     const renderedComponent = shallow(
       <RepoListItem item={item} />
     );
-    expect(renderedComponent.find(ListItem).length).toBe(1);
+    expect(renderedComponent.find(ListItem).length).toEqual(1);
   });
 
   it('should not render the current username', () => {
@@ -43,7 +44,7 @@ describe('<RepoListItem />', () => {
       item,
       currentUser: item.owner.login,
     });
-    expect(renderedComponent.text()).not.toContain(item.owner.login);
+    expect(renderedComponent.text()).toExclude(item.owner.login);
   });
 
   it('should render usernames that are not the current one', () => {
@@ -51,21 +52,21 @@ describe('<RepoListItem />', () => {
       item,
       currentUser: 'nikgraf',
     });
-    expect(renderedComponent.text()).toContain(item.owner.login);
+    expect(renderedComponent.text()).toInclude(item.owner.login);
   });
 
   it('should render the repo name', () => {
     const renderedComponent = renderComponent({ item });
-    expect(renderedComponent.text()).toContain(item.name);
+    expect(renderedComponent.text()).toInclude(item.name);
   });
 
   it('should render the issue count', () => {
     const renderedComponent = renderComponent({ item });
-    expect(renderedComponent.text()).toContain(item.open_issues_count);
+    expect(renderedComponent.text()).toInclude(item.open_issues_count);
   });
 
   it('should render the IssueIcon', () => {
     const renderedComponent = renderComponent({ item });
-    expect(renderedComponent.find('svg').length).toBe(1);
+    expect(renderedComponent.find('svg').length).toEqual(1);
   });
 });

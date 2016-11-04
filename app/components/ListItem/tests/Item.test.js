@@ -1,5 +1,5 @@
 import React from 'react';
-
+import expect from 'expect';
 import { shallow } from 'enzyme';
 
 import Item from '../Item';
@@ -12,7 +12,7 @@ describe('<Item />', () => {
 
   it('should have a className attribute', () => {
     const renderedComponent = shallow(<Item />);
-    expect(renderedComponent.prop('className')).toBeDefined();
+    expect(renderedComponent.prop('className')).toExist();
   });
 
   it('should adopt a valid attribute', () => {
@@ -23,6 +23,6 @@ describe('<Item />', () => {
 
   it('should not adopt an invalid attribute', () => {
     const renderedComponent = shallow(<Item attribute={'test'} />);
-    expect(renderedComponent.prop('attribute')).toBeUndefined();
+    expect(renderedComponent.prop('attribute')).toNotExist();
   });
 });
