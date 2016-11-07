@@ -1,3 +1,4 @@
+import expect from 'expect';
 import { shallow } from 'enzyme';
 import React from 'react';
 
@@ -15,6 +16,6 @@ describe('<FeaturePage />', () => {
       <H1>
         <FormattedMessage {...messages.header} />
       </H1>
-    )).toBe(true);
+    )).toEqual(true);
   });
 });
