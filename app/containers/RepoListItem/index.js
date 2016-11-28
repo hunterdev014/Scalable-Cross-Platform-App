@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { createSelector } from 'reselect';
 import { FormattedNumber } from 'react-intl';
 
 import IssueIcon from './IssueIcon';
@@ -52,6 +52,7 @@ RepoListItem.propTypes = {
   currentUser: React.PropTypes.string,
 };
 
-export default connect(createStructuredSelector({
-  currentUser: selectCurrentUser(),
-}))(RepoListItem);
+export default connect(createSelector(
+  selectCurrentUser(),
+  (currentUser) => ({ currentUser })
+))(RepoListItem);

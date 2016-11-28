@@ -1,17 +1,7 @@
 /**
  * Language Generator
  */
-const fs = require('fs');
 const exec = require('child_process').exec;
-
-function languageIsSupported(language) {
-  try {
-    fs.accessSync(`app/translations/${language}.json`, fs.F_OK);
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
 
 module.exports = {
   description: 'Add a language',
@@ -22,7 +12,7 @@ module.exports = {
     default: 'fr',
     validate: (value) => {
       if ((/.+/).test(value) && value.length === 2) {
-        return languageIsSupported(value) ? `The language "${value}" is already supported.` : true;
+        return true;
       }
 
       return '2 character language specifier is required';
