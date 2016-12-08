@@ -1,11 +1,13 @@
 import { fromJS } from 'immutable';
+import expect from 'expect';
 
 import {
   selectHome,
-  makeSelectUsername,
+  selectUsername,
 } from '../selectors';
 
 describe('selectHome', () => {
+  const homeSelector = selectHome();
   it('should select the home state', () => {
     const homeState = fromJS({
       userData: {},
@@ -13,12 +15,12 @@ describe('selectHome', () => {
     const mockedState = fromJS({
       home: homeState,
     });
-    expect(selectHome(mockedState)).toEqual(homeState);
+    expect(homeSelector(mockedState)).toEqual(homeState);
   });
 });
 
-describe('makeSelectUsername', () => {
-  const usernameSelector = makeSelectUsername();
+describe('selectUsername', () => {
+  const usernameSelector = selectUsername();
   it('should select the username', () => {
     const username = 'mxstbr';
     const mockedState = fromJS({

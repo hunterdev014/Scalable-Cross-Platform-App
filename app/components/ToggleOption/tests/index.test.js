@@ -1,6 +1,7 @@
 import ToggleOption from '../index';
 
-import { shallow, mount } from 'enzyme';
+import expect from 'expect';
+import { shallow } from 'enzyme';
 import { IntlProvider, defineMessages } from 'react-intl';
 import React from 'react';
 
@@ -9,7 +10,7 @@ describe('<ToggleOption />', () => {
     const defaultEnMessage = 'someContent';
     const message = defineMessages({
       enMessage: {
-        id: 'boilerplate.containers.LocaleToggle.en',
+        id: 'app.components.LocaleToggle.en',
         defaultMessage: defaultEnMessage,
       },
     });
@@ -18,15 +19,6 @@ describe('<ToggleOption />', () => {
         <ToggleOption value="en" message={message.enMessage} />
       </IntlProvider>
     );
-    expect(renderedComponent.contains(<ToggleOption value="en" message={message.enMessage} />)).toBe(true);
-  });
-
-  it('should display `value`(two letter language code) when `message` is absent', () => {
-    const renderedComponent = mount(
-      <IntlProvider locale="de">
-        <ToggleOption value="de" />
-      </IntlProvider>
-    );
-    expect(renderedComponent.text()).toBe('de');
+    expect(renderedComponent.contains(<ToggleOption value="en" message={message.enMessage} />)).toEqual(true);
   });
 });

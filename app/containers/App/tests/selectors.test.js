@@ -1,26 +1,28 @@
 import { fromJS } from 'immutable';
+import expect from 'expect';
 
 import {
   selectGlobal,
-  makeSelectCurrentUser,
-  makeSelectLoading,
-  makeSelectError,
-  makeSelectRepos,
-  makeSelectLocationState,
+  selectCurrentUser,
+  selectLoading,
+  selectError,
+  selectRepos,
+  selectLocationState,
 } from '../selectors';
 
 describe('selectGlobal', () => {
+  const globalSelector = selectGlobal();
   it('should select the global state', () => {
     const globalState = fromJS({});
     const mockedState = fromJS({
       global: globalState,
     });
-    expect(selectGlobal(mockedState)).toEqual(globalState);
+    expect(globalSelector(mockedState)).toEqual(globalState);
   });
 });
 
-describe('makeSelectCurrentUser', () => {
-  const currentUserSelector = makeSelectCurrentUser();
+describe('selectCurrentUser', () => {
+  const currentUserSelector = selectCurrentUser();
   it('should select the current user', () => {
     const username = 'mxstbr';
     const mockedState = fromJS({
@@ -32,8 +34,8 @@ describe('makeSelectCurrentUser', () => {
   });
 });
 
-describe('makeSelectLoading', () => {
-  const loadingSelector = makeSelectLoading();
+describe('selectLoading', () => {
+  const loadingSelector = selectLoading();
   it('should select the loading', () => {
     const loading = false;
     const mockedState = fromJS({
@@ -45,8 +47,8 @@ describe('makeSelectLoading', () => {
   });
 });
 
-describe('makeSelectError', () => {
-  const errorSelector = makeSelectError();
+describe('selectError', () => {
+  const errorSelector = selectError();
   it('should select the error', () => {
     const error = 404;
     const mockedState = fromJS({
@@ -58,8 +60,8 @@ describe('makeSelectError', () => {
   });
 });
 
-describe('makeSelectRepos', () => {
-  const reposSelector = makeSelectRepos();
+describe('selectRepos', () => {
+  const reposSelector = selectRepos();
   it('should select the repos', () => {
     const repositories = fromJS([]);
     const mockedState = fromJS({
@@ -73,8 +75,8 @@ describe('makeSelectRepos', () => {
   });
 });
 
-describe('makeSelectLocationState', () => {
-  const locationStateSelector = makeSelectLocationState();
+describe('selectLocationState', () => {
+  const locationStateSelector = selectLocationState();
   it('should select the route as a plain JS object', () => {
     const route = fromJS({
       locationBeforeTransitions: null,

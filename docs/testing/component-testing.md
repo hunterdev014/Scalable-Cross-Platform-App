@@ -119,7 +119,7 @@ it('renders a <button>', () => {
   );
   expect(
     renderedComponent.find("button").node
-  ).toBeDefined();
+  ).toExist();
 });
 ```
 
@@ -150,7 +150,7 @@ see that our Spy was called:
 
 ```javascript
 it('handles clicks', () => {
-  const onClickSpy = jest.fn();
+  const onClickSpy = expect.createSpy();
   const renderedComponent = shallow(<Button onClick={onClickSpy} />);
   renderedComponent.find('button').simulate('click');
   expect(onClickSpy).toHaveBeenCalled();

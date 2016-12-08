@@ -1,5 +1,5 @@
 import React from 'react';
-
+import expect from 'expect';
 import { shallow, render } from 'enzyme';
 
 import RepoLink from '../RepoLink';
@@ -12,7 +12,7 @@ describe('<RepoLink />', () => {
 
   it('should have a className attribute', () => {
     const renderedComponent = shallow(<RepoLink />);
-    expect(renderedComponent.prop('className')).toBeDefined();
+    expect(renderedComponent.prop('className')).toExist();
   });
 
   it('should adopt a valid attribute', () => {
@@ -23,6 +23,6 @@ describe('<RepoLink />', () => {
 
   it('should not adopt an invalid attribute', () => {
     const renderedComponent = shallow(<RepoLink attribute={'test'} />);
-    expect(renderedComponent.prop('attribute')).toBeUndefined();
+    expect(renderedComponent.prop('attribute')).toNotExist();
   });
 });

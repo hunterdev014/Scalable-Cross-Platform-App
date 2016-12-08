@@ -4,6 +4,7 @@
 
 import Button from '../index';
 
+import expect from 'expect';
 import { mount } from 'enzyme';
 import React from 'react';
 
@@ -33,7 +34,7 @@ describe('<Button />', () => {
   });
 
   it('should handle click events', () => {
-    const onClickSpy = jest.fn();
+    const onClickSpy = expect.createSpy();
     const renderedComponent = renderComponent({ onClick: onClickSpy });
     renderedComponent.find('a').simulate('click');
     expect(onClickSpy).toHaveBeenCalled();
@@ -41,18 +42,18 @@ describe('<Button />', () => {
 
   it('should have a className attribute', () => {
     const renderedComponent = renderComponent();
-    expect(renderedComponent.find('a').prop('className')).toBeDefined();
+    expect(renderedComponent.find('a').prop('className')).toExist();
   });
 
   it('should not adopt a type attribute when rendering an <a> tag', () => {
     const type = 'text/html';
     const renderedComponent = renderComponent({ href, type });
-    expect(renderedComponent.find('a').prop('type')).toBeUndefined();
+    expect(renderedComponent.find('a').prop('type')).toNotExist();
   });
 
   it('should not adopt a type attribute when rendering a button', () => {
     const type = 'submit';
     const renderedComponent = renderComponent({ handleRoute, type });
-    expect(renderedComponent.find('button').prop('type')).toBeUndefined();
+    expect(renderedComponent.find('button').prop('type')).toNotExist();
   });
 });
