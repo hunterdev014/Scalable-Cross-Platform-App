@@ -1,6 +1,6 @@
 {
   "name": "react-boilerplate",
-  "version": "3.3.0",
+  "version": "3.3.3",
   "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
   "repository": {
     "type": "git",
@@ -230,7 +230,7 @@
     "react-router-scroll": "0.4.1",
     "redux": "3.6.0",
     "redux-immutable": "3.0.8",
-    "redux-saga": "0.14.0",
+    "redux-saga": "0.13.0",
     "reselect": "2.5.4",
     "sanitize.css": "4.1.0",
     "styled-components": "1.1.2",
