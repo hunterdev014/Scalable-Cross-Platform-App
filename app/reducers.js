@@ -16,9 +16,10 @@ export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
     global: globalReducer,
     language: languageProviderReducer,
-    router: connectRouter(history),
     ...injectedReducers,
   });
 
-  return rootReducer;
+  // Wrap the root reducer and return a new root reducer with router state
+  const mergeWithRouterState = connectRouter(history);
+  return mergeWithRouterState(rootReducer);
 }
