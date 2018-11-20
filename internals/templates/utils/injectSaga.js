@@ -9,11 +9,10 @@ import getInjectors from './sagaInjectors';
  *
  * @param {string} key A key of the saga
  * @param {function} saga A root saga that will be injected
- * @param {string} [mode] By default (constants.DAEMON) the saga will be started
- * on component mount and never canceled or started again. Another two options:
- *   - constants.RESTART_ON_REMOUNT — the saga will be started on component mount and
- *   cancelled with `task.cancel()` on component unmount for improved performance,
- *   - constants.ONCE_TILL_UNMOUNT — behaves like 'RESTART_ON_REMOUNT' but never runs it again.
+ * @param {string} [mode] By default (constants.RESTART_ON_REMOUNT) the saga will be started on component mount and
+ * cancelled with `task.cancel()` on component un-mount for improved performance. Another two options:
+ *   - constants.DAEMON—starts the saga on component mount and never cancels it or starts again,
+ *   - constants.ONCE_TILL_UNMOUNT—behaves like 'RESTART_ON_REMOUNT' but never runs it again.
  *
  */
 export default ({ key, saga, mode }) => WrappedComponent => {
@@ -28,17 +27,19 @@ export default ({ key, saga, mode }) => WrappedComponent => {
       WrappedComponent.name ||
       'Component'})`;
 
-    constructor(props, context) {
-      super(props, context);
+    componentWillMount() {
+      const { injectSaga } = this.injectors;
 
-      this.injectors = getInjectors(context.store);
-
-      this.injectors.injectSaga(key, { saga, mode }, this.props);
+      injectSaga(key, { saga, mode }, this.props);
     }
 
     componentWillUnmount() {
-      this.injectors.ejectSaga(key);
+      const { ejectSaga } = this.injectors;
+
+      ejectSaga(key);
     }
+
+    injectors = getInjectors(this.context.store);
 
     render() {
       return <WrappedComponent {...this.props} />;
